@@ -1,3 +1,6 @@
+
+import controlador.ControladorPrincipal;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
@@ -11,6 +14,6 @@
 public class Planificador_Builds_Warframe {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        ControladorPrincipal.iniciar();
     }
 }
