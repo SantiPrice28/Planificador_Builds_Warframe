@@ -9,7 +9,7 @@ import java.util.List;
 public class BasicConnectionPool
         implements ConnectionPool {
 
-    private static final int MAX_POOL_SIZE = 10;
+    private static final int MAX_POOL_SIZE = 20;
     private static final int MAX_TIMEOUT = 1000;
     private String url;
     private String user;

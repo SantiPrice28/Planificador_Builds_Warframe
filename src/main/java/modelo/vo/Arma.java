@@ -44,7 +44,8 @@ public class Arma {
         this.cadencia = fireRate;
         this.descripcion = descripcion;
     }
-
+    
+    // Getters y Setters
     public int getId() {
         return id;
     }

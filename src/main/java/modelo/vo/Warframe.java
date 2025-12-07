@@ -16,8 +16,12 @@ public class Warframe {
     private int armadura;
     private int energia;
     private String descripcion;
+    private double duracion;
+    private double eficiencia;
+    private double fuerza;
+    private double rango;
 
-    public Warframe(int id, String nombre, int salud, int escudo, int armadura, int energia, String descripcion) {
+    public Warframe(int id, String nombre, int salud, int escudo, int armadura, int energia, String descripcion, double duracion, double eficiencia, double fuerza, double rango) {
         this.id = id;
         this.nombre = nombre;
         this.salud = salud;
@@ -25,6 +29,10 @@ public class Warframe {
         this.armadura = armadura;
         this.energia = energia;
         this.descripcion = descripcion;
+        this.duracion = duracion;
+        this.eficiencia = eficiencia;
+        this.fuerza = fuerza;
+        this.rango = rango;
     }
 
     public int getId() {
@@ -55,10 +63,40 @@ public class Warframe {
         return descripcion;
     }
 
+    public double getDuracion() {
+        return duracion;
+    }
+
+    public void setDuracion(double duracion) {
+        this.duracion = duracion;
+    }
+
+    public double getEficiencia() {
+        return eficiencia;
+    }
+
+    public void setEficiencia(double eficiencia) {
+        this.eficiencia = eficiencia;
+    }
+
+    public double getFuerza() {
+        return fuerza;
+    }
+
+    public void setFuerza(double fuerza) {
+        this.fuerza = fuerza;
+    }
+
+    public double getRango() {
+        return rango;
+    }
+
+    public void setRango(double rango) {
+        this.rango = rango;
+    }
+
     @Override
     public String toString() {
         return nombre;
     }
-    
-    
 }

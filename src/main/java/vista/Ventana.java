@@ -9,10 +9,10 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
-import modelo.vo.Arma;
-import modelo.vo.Mod;
-import modelo.vo.Warframe;
+//import modelo.util.ThemeManager;
+import modelo.vo.*;
 
 /**
  *
@@ -40,7 +40,50 @@ public class Ventana extends javax.swing.JFrame {
         panel_menu = new javax.swing.JPanel();
         btn_armas = new javax.swing.JButton();
         btn_warframes = new javax.swing.JButton();
+        btn_cerrarSesion = new javax.swing.JButton();
+        btn_builds = new javax.swing.JButton();
         panel_pantalla = new javax.swing.JPanel();
+        panel_warframes = new javax.swing.JPanel();
+        cmb_warframes = new javax.swing.JComboBox<>();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        cmb_mods_wf_1 = new javax.swing.JComboBox<>();
+        cmb_mods_wf_2 = new javax.swing.JComboBox<>();
+        cmb_mods_wf_3 = new javax.swing.JComboBox<>();
+        cmb_mods_wf_4 = new javax.swing.JComboBox<>();
+        cmb_mods_wf_5 = new javax.swing.JComboBox<>();
+        cmb_mods_wf_6 = new javax.swing.JComboBox<>();
+        cmb_mods_wf_7 = new javax.swing.JComboBox<>();
+        cmb_mods_wf_8 = new javax.swing.JComboBox<>();
+        jLabel18 = new javax.swing.JLabel();
+        label_wf_1 = new javax.swing.JLabel();
+        label_wf_2 = new javax.swing.JLabel();
+        label_wf_3 = new javax.swing.JLabel();
+        label_wf_4 = new javax.swing.JLabel();
+        label_wf_5 = new javax.swing.JLabel();
+        label_wf_6 = new javax.swing.JLabel();
+        label_wf_7 = new javax.swing.JLabel();
+        label_wf_8 = new javax.swing.JLabel();
+        lbl_stats2 = new javax.swing.JLabel();
+        btn_guardarBuildWarframe = new javax.swing.JButton();
+        btn_limpiar_mods_warframe = new javax.swing.JButton();
+        panel_builds = new javax.swing.JPanel();
+        jLabel20 = new javax.swing.JLabel();
+        cmb_tipo_build = new javax.swing.JComboBox<>();
+        scrollpane = new javax.swing.JScrollPane();
+        list_builds = new javax.swing.JList<>();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txt_descripcion = new javax.swing.JTextArea();
+        btn_cargar = new javax.swing.JButton();
+        btn_eliminar = new javax.swing.JButton();
         panel_armas = new javax.swing.JPanel();
         cmb_armas = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
@@ -72,11 +115,18 @@ public class Ventana extends javax.swing.JFrame {
         cmb_mods_6 = new javax.swing.JComboBox<>();
         cmb_mods_7 = new javax.swing.JComboBox<>();
         cmb_mods_8 = new javax.swing.JComboBox<>();
-        panel_warframes = new javax.swing.JPanel();
-        cmb_warframes = new javax.swing.JComboBox<>();
-        panel_builds = new javax.swing.JPanel();
+        label13 = new javax.swing.JLabel();
+        label14 = new javax.swing.JLabel();
+        label15 = new javax.swing.JLabel();
+        label16 = new javax.swing.JLabel();
+        label17 = new javax.swing.JLabel();
+        label18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        btn_guardarBuildArma = new javax.swing.JButton();
+        btn_limpiar_mods_arma = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Planificador Builds Warframe");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
@@ -102,6 +152,20 @@ public class Ventana extends javax.swing.JFrame {
             }
         });
 
+        btn_cerrarSesion.setText("Cerrar sesion");
+        btn_cerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_cerrarSesionActionPerformed(evt);
+            }
+        });
+
+        btn_builds.setText("Builds");
+        btn_builds.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_buildsActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panel_menuLayout = new javax.swing.GroupLayout(panel_menu);
         panel_menu.setLayout(panel_menuLayout);
         panel_menuLayout.setHorizontalGroup(
@@ -111,7 +175,11 @@ public class Ventana extends javax.swing.JFrame {
                 .addComponent(btn_armas)
                 .addGap(38, 38, 38)
                 .addComponent(btn_warframes)
-                .addContainerGap(496, Short.MAX_VALUE))
+                .addGap(54, 54, 54)
+                .addComponent(btn_builds)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 365, Short.MAX_VALUE)
+                .addComponent(btn_cerrarSesion)
+                .addGap(65, 65, 65))
         );
         panel_menuLayout.setVerticalGroup(
             panel_menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -119,13 +187,342 @@ public class Ventana extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addGroup(panel_menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_armas)
-                    .addComponent(btn_warframes))
+                    .addComponent(btn_warframes)
+                    .addComponent(btn_cerrarSesion)
+                    .addComponent(btn_builds))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
         jPanel1.add(panel_menu, java.awt.BorderLayout.PAGE_START);
 
         panel_pantalla.setLayout(new java.awt.CardLayout());
+
+        cmb_warframes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmb_warframesActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setText("Mod 1");
+
+        jLabel11.setText("Mod 3");
+
+        jLabel12.setText("Mod 5");
+
+        jLabel13.setText("Mod 7");
+
+        jLabel14.setText("Mod 2");
+
+        jLabel15.setText("Mod 4");
+
+        jLabel16.setText("Mod 6");
+
+        jLabel17.setText("Mod 8");
+
+        cmb_mods_wf_1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmb_mods_wf_1ActionPerformed(evt);
+            }
+        });
+
+        cmb_mods_wf_2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmb_mods_wf_2ActionPerformed(evt);
+            }
+        });
+
+        cmb_mods_wf_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmb_mods_wf_3ActionPerformed(evt);
+            }
+        });
+
+        cmb_mods_wf_4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmb_mods_wf_4ActionPerformed(evt);
+            }
+        });
+
+        cmb_mods_wf_5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmb_mods_wf_5ActionPerformed(evt);
+            }
+        });
+
+        cmb_mods_wf_6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmb_mods_wf_6ActionPerformed(evt);
+            }
+        });
+
+        cmb_mods_wf_7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmb_mods_wf_7ActionPerformed(evt);
+            }
+        });
+
+        cmb_mods_wf_8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmb_mods_wf_8ActionPerformed(evt);
+            }
+        });
+
+        jLabel18.setText("Selecciona el warframe");
+
+        label_wf_1.setText("jLabel19");
+
+        label_wf_2.setText("jLabel19");
+
+        label_wf_3.setText("jLabel19");
+
+        label_wf_4.setText("jLabel19");
+
+        label_wf_5.setText("jLabel19");
+
+        label_wf_6.setText("jLabel19");
+
+        label_wf_7.setText("jLabel19");
+
+        label_wf_8.setText("jLabel19");
+
+        lbl_stats2.setText("Estadisticas");
+
+        btn_guardarBuildWarframe.setText("Guardar Build");
+        btn_guardarBuildWarframe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_guardarBuildWarframeActionPerformed(evt);
+            }
+        });
+
+        btn_limpiar_mods_warframe.setText("Limpiar mods");
+        btn_limpiar_mods_warframe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_limpiar_mods_warframeActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panel_warframesLayout = new javax.swing.GroupLayout(panel_warframes);
+        panel_warframes.setLayout(panel_warframesLayout);
+        panel_warframesLayout.setHorizontalGroup(
+            panel_warframesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_warframesLayout.createSequentialGroup()
+                .addGap(63, 63, 63)
+                .addGroup(panel_warframesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_warframesLayout.createSequentialGroup()
+                        .addGroup(panel_warframesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cmb_mods_wf_7, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(panel_warframesLayout.createSequentialGroup()
+                                .addComponent(cmb_mods_wf_5, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(115, 115, 115)
+                                .addComponent(cmb_mods_wf_6, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(panel_warframesLayout.createSequentialGroup()
+                        .addGap(315, 315, 315)
+                        .addComponent(cmb_mods_wf_8, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_warframesLayout.createSequentialGroup()
+                        .addGroup(panel_warframesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panel_warframesLayout.createSequentialGroup()
+                                .addGroup(panel_warframesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(panel_warframesLayout.createSequentialGroup()
+                                        .addComponent(cmb_mods_wf_1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(115, 115, 115)
+                                        .addGroup(panel_warframesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(panel_warframesLayout.createSequentialGroup()
+                                                .addGroup(panel_warframesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jLabel15)
+                                                    .addComponent(cmb_mods_wf_4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGap(48, 48, 48)
+                                                .addGroup(panel_warframesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(label_wf_2)
+                                                    .addComponent(label_wf_1)
+                                                    .addComponent(label_wf_3)
+                                                    .addComponent(label_wf_4)))
+                                            .addGroup(panel_warframesLayout.createSequentialGroup()
+                                                .addComponent(cmb_mods_wf_2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(103, 103, 103)
+                                                .addComponent(lbl_stats2)))
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(panel_warframesLayout.createSequentialGroup()
+                                        .addGroup(panel_warframesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addGroup(panel_warframesLayout.createSequentialGroup()
+                                                .addComponent(jLabel13)
+                                                .addGap(281, 281, 281)
+                                                .addComponent(jLabel17))
+                                            .addGroup(panel_warframesLayout.createSequentialGroup()
+                                                .addGroup(panel_warframesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jLabel11)
+                                                    .addComponent(cmb_mods_wf_3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jLabel12))
+                                                .addGap(115, 115, 115)
+                                                .addComponent(jLabel16))
+                                            .addGroup(panel_warframesLayout.createSequentialGroup()
+                                                .addComponent(jLabel10)
+                                                .addGap(281, 281, 281)
+                                                .addComponent(jLabel14)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel18)))
+                                .addGap(18, 18, 18)
+                                .addComponent(cmb_warframes, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panel_warframesLayout.createSequentialGroup()
+                                .addGap(639, 639, 639)
+                                .addComponent(btn_limpiar_mods_warframe)
+                                .addGap(18, 18, 18)
+                                .addGroup(panel_warframesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(label_wf_5)
+                                    .addComponent(label_wf_6)
+                                    .addComponent(label_wf_7)
+                                    .addComponent(label_wf_8)
+                                    .addComponent(btn_guardarBuildWarframe))))
+                        .addGap(79, 79, 79))))
+        );
+        panel_warframesLayout.setVerticalGroup(
+            panel_warframesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_warframesLayout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addGroup(panel_warframesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmb_warframes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel14)
+                    .addComponent(jLabel18))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panel_warframesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmb_mods_wf_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmb_mods_wf_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_stats2))
+                .addGap(18, 18, 18)
+                .addGroup(panel_warframesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel15)
+                    .addComponent(label_wf_1)
+                    .addComponent(label_wf_5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panel_warframesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmb_mods_wf_3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmb_mods_wf_4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(label_wf_2)
+                    .addComponent(label_wf_6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panel_warframesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel16)
+                    .addComponent(label_wf_3)
+                    .addComponent(label_wf_7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panel_warframesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmb_mods_wf_5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmb_mods_wf_6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(label_wf_4)
+                    .addComponent(label_wf_8))
+                .addGap(18, 18, 18)
+                .addGroup(panel_warframesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(jLabel17))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panel_warframesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmb_mods_wf_7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmb_mods_wf_8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
+                .addGroup(panel_warframesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_guardarBuildWarframe)
+                    .addComponent(btn_limpiar_mods_warframe))
+                .addGap(41, 41, 41))
+        );
+
+        panel_pantalla.add(panel_warframes, "card3");
+
+        jLabel20.setText("Tipo de build:");
+
+        cmb_tipo_build.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Arma", "Warframe" }));
+        cmb_tipo_build.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmb_tipo_buildActionPerformed(evt);
+            }
+        });
+
+        list_builds.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                list_buildsValueChanged(evt);
+            }
+        });
+        scrollpane.setViewportView(list_builds);
+
+        jLabel21.setText("Builds:");
+
+        jLabel22.setText("Descripcion:");
+
+        txt_descripcion.setColumns(20);
+        txt_descripcion.setRows(5);
+        txt_descripcion.setEnabled(false);
+        jScrollPane1.setViewportView(txt_descripcion);
+
+        btn_cargar.setText("Cargar build");
+        btn_cargar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_cargarActionPerformed(evt);
+            }
+        });
+
+        btn_eliminar.setText("Eliminar build");
+        btn_eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_eliminarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panel_buildsLayout = new javax.swing.GroupLayout(panel_builds);
+        panel_builds.setLayout(panel_buildsLayout);
+        panel_buildsLayout.setHorizontalGroup(
+            panel_buildsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_buildsLayout.createSequentialGroup()
+                .addGap(85, 85, 85)
+                .addGroup(panel_buildsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_buildsLayout.createSequentialGroup()
+                        .addComponent(jLabel22)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(panel_buildsLayout.createSequentialGroup()
+                        .addGroup(panel_buildsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panel_buildsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jScrollPane1)
+                                .addComponent(scrollpane, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))
+                            .addComponent(jLabel21))
+                        .addGap(18, 18, 18)
+                        .addGroup(panel_buildsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panel_buildsLayout.createSequentialGroup()
+                                .addComponent(jLabel20)
+                                .addGap(18, 18, 18)
+                                .addComponent(cmb_tipo_build, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btn_cargar, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_eliminar))
+                        .addContainerGap(368, Short.MAX_VALUE))))
+        );
+        panel_buildsLayout.setVerticalGroup(
+            panel_buildsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_buildsLayout.createSequentialGroup()
+                .addGroup(panel_buildsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_buildsLayout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addGroup(panel_buildsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel20)
+                            .addComponent(cmb_tipo_build, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_buildsLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel21)))
+                .addGap(18, 18, 18)
+                .addGroup(panel_buildsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(scrollpane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panel_buildsLayout.createSequentialGroup()
+                        .addComponent(btn_cargar)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_eliminar)))
+                .addGap(28, 28, 28)
+                .addComponent(jLabel22)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(88, Short.MAX_VALUE))
+        );
+
+        panel_pantalla.add(panel_builds, "card2");
 
         cmb_armas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -223,6 +620,34 @@ public class Ventana extends javax.swing.JFrame {
             }
         });
 
+        label13.setText("label 13");
+
+        label14.setText("label 14");
+
+        label15.setText("label 15");
+
+        label16.setText("label 16");
+
+        label17.setText("label 17");
+
+        label18.setText("label 18");
+
+        jLabel19.setText("Estadisticas");
+
+        btn_guardarBuildArma.setText("Guardar Build");
+        btn_guardarBuildArma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_guardarBuildArmaActionPerformed(evt);
+            }
+        });
+
+        btn_limpiar_mods_arma.setText("Limpiar mods");
+        btn_limpiar_mods_arma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_limpiar_mods_armaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panel_armasLayout = new javax.swing.GroupLayout(panel_armas);
         panel_armas.setLayout(panel_armasLayout);
         panel_armasLayout.setHorizontalGroup(
@@ -250,44 +675,62 @@ public class Ventana extends javax.swing.JFrame {
                                 .addGroup(panel_armasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(cmb_mods_6, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel9)
-                                    .addComponent(cmb_mods_4, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
-                        .addGroup(panel_armasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(label5)
-                            .addComponent(label4)
-                            .addComponent(label2)
+                                    .addComponent(cmb_mods_4, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(panel_armasLayout.createSequentialGroup()
-                                .addComponent(jLabel1)
+                                .addGroup(panel_armasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(cmb_mods_1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(32, 32, 32)
-                                .addComponent(cmb_armas, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(panel_armasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(cmb_mods_2, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(panel_armasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panel_armasLayout.createSequentialGroup()
+                                .addGap(54, 54, 54)
                                 .addGroup(panel_armasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(label1)
-                                    .addComponent(label3)
-                                    .addComponent(label6))
-                                .addGap(111, 111, 111)
+                                    .addGroup(panel_armasLayout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addGap(32, 32, 32))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_armasLayout.createSequentialGroup()
+                                        .addGroup(panel_armasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(label2)
+                                            .addComponent(label1)
+                                            .addComponent(label3)
+                                            .addComponent(label4)
+                                            .addComponent(label5)
+                                            .addComponent(label6)
+                                            .addComponent(label7)
+                                            .addComponent(label8)
+                                            .addComponent(label9))
+                                        .addGap(96, 96, 96)))
                                 .addGroup(panel_armasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(label12)
-                                    .addComponent(label8)
-                                    .addComponent(label7)
-                                    .addComponent(label9)
-                                    .addComponent(label10)
-                                    .addComponent(label11))))
-                        .addGap(51, 51, 51))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_armasLayout.createSequentialGroup()
+                                    .addComponent(cmb_armas, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(panel_armasLayout.createSequentialGroup()
+                                        .addGap(90, 90, 90)
+                                        .addGroup(panel_armasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(label11)
+                                            .addComponent(label10)
+                                            .addComponent(label12)
+                                            .addComponent(label13)
+                                            .addComponent(label14)
+                                            .addComponent(label15)
+                                            .addComponent(label16)
+                                            .addComponent(label17)
+                                            .addComponent(label18)))))
+                            .addGroup(panel_armasLayout.createSequentialGroup()
+                                .addGap(163, 163, 163)
+                                .addComponent(jLabel19))))
+                    .addGroup(panel_armasLayout.createSequentialGroup()
                         .addComponent(cmb_mods_7, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(32, 32, 32)
-                        .addComponent(cmb_mods_8, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(panel_armasLayout.createSequentialGroup()
-                        .addGroup(panel_armasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cmb_mods_1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
-                        .addGap(32, 32, 32)
-                        .addGroup(panel_armasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(cmb_mods_2, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(cmb_mods_8, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(51, 217, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_armasLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_limpiar_mods_arma)
+                .addGap(18, 18, 18)
+                .addComponent(btn_guardarBuildArma)
+                .addGap(133, 133, 133))
         );
         panel_armasLayout.setVerticalGroup(
             panel_armasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -300,40 +743,47 @@ public class Ventana extends javax.swing.JFrame {
                     .addComponent(jLabel5))
                 .addGroup(panel_armasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel_armasLayout.createSequentialGroup()
-                        .addGap(51, 51, 51)
+                        .addGap(29, 29, 29)
                         .addGroup(panel_armasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(label1)
-                            .addComponent(label7))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panel_armasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(label2)
-                            .addComponent(label8))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panel_armasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(label3)
-                            .addComponent(label9))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panel_armasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(label4)
                             .addComponent(label10))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panel_armasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(label5)
+                            .addComponent(label2)
                             .addComponent(label11))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panel_armasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(label3)
+                            .addComponent(label12))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panel_armasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(label4)
+                            .addComponent(label13))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panel_armasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(label5)
+                            .addComponent(label14))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panel_armasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(label6)
-                            .addComponent(label12)))
+                            .addComponent(label15))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panel_armasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(label7)
+                            .addComponent(label16)))
                     .addGroup(panel_armasLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(panel_armasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panel_armasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(panel_armasLayout.createSequentialGroup()
                                 .addGroup(panel_armasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(cmb_mods_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(cmb_mods_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel3))
-                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_armasLayout.createSequentialGroup()
+                                .addComponent(jLabel19)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel6)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(panel_armasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cmb_mods_3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -346,56 +796,39 @@ public class Ventana extends javax.swing.JFrame {
                         .addGroup(panel_armasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cmb_mods_5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cmb_mods_6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(18, 18, 18)
                 .addGroup(panel_armasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addGroup(panel_armasLayout.createSequentialGroup()
+                        .addGroup(panel_armasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panel_armasLayout.createSequentialGroup()
+                                .addGap(9, 9, 9)
+                                .addComponent(jLabel8))
+                            .addGroup(panel_armasLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addGroup(panel_armasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(label17)
+                                    .addComponent(label8))))
+                        .addGroup(panel_armasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panel_armasLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(cmb_mods_8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panel_armasLayout.createSequentialGroup()
+                                .addGap(3, 3, 3)
+                                .addGroup(panel_armasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(label18)
+                                    .addComponent(label9)))))
+                    .addGroup(panel_armasLayout.createSequentialGroup()
+                        .addGap(11, 11, 11)
+                        .addComponent(jLabel7)
+                        .addGap(18, 18, 18)
+                        .addComponent(cmb_mods_7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
                 .addGroup(panel_armasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmb_mods_7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmb_mods_8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(120, Short.MAX_VALUE))
+                    .addComponent(btn_guardarBuildArma)
+                    .addComponent(btn_limpiar_mods_arma))
+                .addGap(36, 36, 36))
         );
 
         panel_pantalla.add(panel_armas, "card4");
-
-        cmb_warframes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmb_warframesActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout panel_warframesLayout = new javax.swing.GroupLayout(panel_warframes);
-        panel_warframes.setLayout(panel_warframesLayout);
-        panel_warframesLayout.setHorizontalGroup(
-            panel_warframesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_warframesLayout.createSequentialGroup()
-                .addContainerGap(656, Short.MAX_VALUE)
-                .addComponent(cmb_warframes, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50))
-        );
-        panel_warframesLayout.setVerticalGroup(
-            panel_warframesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel_warframesLayout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(cmb_warframes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(378, Short.MAX_VALUE))
-        );
-
-        panel_pantalla.add(panel_warframes, "card3");
-
-        javax.swing.GroupLayout panel_buildsLayout = new javax.swing.GroupLayout(panel_builds);
-        panel_builds.setLayout(panel_buildsLayout);
-        panel_buildsLayout.setHorizontalGroup(
-            panel_buildsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 846, Short.MAX_VALUE)
-        );
-        panel_buildsLayout.setVerticalGroup(
-            panel_buildsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 436, Short.MAX_VALUE)
-        );
-
-        panel_pantalla.add(panel_builds, "card2");
 
         jPanel1.add(panel_pantalla, java.awt.BorderLayout.CENTER);
 
@@ -418,9 +851,15 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        String tipo_build = (String) cmb_tipo_build.getSelectedItem();
+
         ControladorPrincipal.cargarArmas();
         ControladorPrincipal.cargarWarframes();
         ControladorPrincipal.cargarMods();
+        ControladorPrincipal.cargarModsWarframe();
+        ControladorPrincipal.cargarStatsBaseArma();
+        ControladorPrincipal.actualizarStatsArmaAsync();
+        ControladorPrincipal.cargarListaBuilds(tipo_build, list_builds);
     }//GEN-LAST:event_formWindowOpened
 
     private void btn_armasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_armasActionPerformed
@@ -438,45 +877,192 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_warframesActionPerformed
 
     private void cmb_warframesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_warframesActionPerformed
-        
+        ControladorPrincipal.cargarStatsBaseWarframe();
+        ControladorPrincipal.cargarModsWarframe();
     }//GEN-LAST:event_cmb_warframesActionPerformed
 
     private void cmb_armasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_armasActionPerformed
         ControladorPrincipal.cargarStatsBaseArma();
+        ControladorPrincipal.actualizarStatsArmaAsync();
         ControladorPrincipal.resetearCombosMods();
+        ControladorPrincipal.cargarMods();
     }//GEN-LAST:event_cmb_armasActionPerformed
 
     private void cmb_mods_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_mods_1ActionPerformed
-        ControladorPrincipal.actualizarStatsArma();
+        ControladorPrincipal.actualizarDisponibilidadMods();
+        ControladorPrincipal.actualizarStatsArmaAsync();
     }//GEN-LAST:event_cmb_mods_1ActionPerformed
 
     private void cmb_mods_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_mods_2ActionPerformed
-        ControladorPrincipal.actualizarStatsArma();
+        ControladorPrincipal.actualizarDisponibilidadMods();
+        ControladorPrincipal.actualizarStatsArmaAsync();
     }//GEN-LAST:event_cmb_mods_2ActionPerformed
 
     private void cmb_mods_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_mods_3ActionPerformed
-        ControladorPrincipal.actualizarStatsArma();
+        ControladorPrincipal.actualizarDisponibilidadMods();
+        ControladorPrincipal.actualizarStatsArmaAsync();
     }//GEN-LAST:event_cmb_mods_3ActionPerformed
 
     private void cmb_mods_4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_mods_4ActionPerformed
-        ControladorPrincipal.actualizarStatsArma();
+        ControladorPrincipal.actualizarDisponibilidadMods();
+        ControladorPrincipal.actualizarStatsArmaAsync();
     }//GEN-LAST:event_cmb_mods_4ActionPerformed
 
     private void cmb_mods_5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_mods_5ActionPerformed
-        ControladorPrincipal.actualizarStatsArma();
+        ControladorPrincipal.actualizarDisponibilidadMods();
+        ControladorPrincipal.actualizarStatsArmaAsync();
     }//GEN-LAST:event_cmb_mods_5ActionPerformed
 
     private void cmb_mods_6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_mods_6ActionPerformed
-        ControladorPrincipal.actualizarStatsArma();
+        ControladorPrincipal.actualizarDisponibilidadMods();
+        ControladorPrincipal.actualizarStatsArmaAsync();
     }//GEN-LAST:event_cmb_mods_6ActionPerformed
 
     private void cmb_mods_7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_mods_7ActionPerformed
-        ControladorPrincipal.actualizarStatsArma();
+        ControladorPrincipal.actualizarDisponibilidadMods();
+        ControladorPrincipal.actualizarStatsArmaAsync();
     }//GEN-LAST:event_cmb_mods_7ActionPerformed
 
     private void cmb_mods_8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_mods_8ActionPerformed
-        ControladorPrincipal.actualizarStatsArma();
+        ControladorPrincipal.actualizarDisponibilidadMods();
+        ControladorPrincipal.actualizarStatsArmaAsync();
     }//GEN-LAST:event_cmb_mods_8ActionPerformed
+
+    private void cmb_mods_wf_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_mods_wf_3ActionPerformed
+        ControladorPrincipal.actualizarDisponibilidadModsWarframe();
+        ControladorPrincipal.actualizarStatsWarframeAsync();
+    }//GEN-LAST:event_cmb_mods_wf_3ActionPerformed
+
+    private void cmb_mods_wf_4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_mods_wf_4ActionPerformed
+        ControladorPrincipal.actualizarDisponibilidadModsWarframe();
+        ControladorPrincipal.actualizarStatsWarframeAsync();
+    }//GEN-LAST:event_cmb_mods_wf_4ActionPerformed
+
+    private void cmb_mods_wf_5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_mods_wf_5ActionPerformed
+        ControladorPrincipal.actualizarDisponibilidadModsWarframe();
+        ControladorPrincipal.actualizarStatsWarframeAsync();
+    }//GEN-LAST:event_cmb_mods_wf_5ActionPerformed
+
+    private void cmb_mods_wf_6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_mods_wf_6ActionPerformed
+        ControladorPrincipal.actualizarDisponibilidadModsWarframe();
+        ControladorPrincipal.actualizarStatsWarframeAsync();
+    }//GEN-LAST:event_cmb_mods_wf_6ActionPerformed
+
+    private void cmb_mods_wf_7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_mods_wf_7ActionPerformed
+        ControladorPrincipal.actualizarDisponibilidadModsWarframe();
+        ControladorPrincipal.actualizarStatsWarframeAsync();
+    }//GEN-LAST:event_cmb_mods_wf_7ActionPerformed
+
+    private void cmb_mods_wf_8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_mods_wf_8ActionPerformed
+        ControladorPrincipal.actualizarDisponibilidadModsWarframe();
+        ControladorPrincipal.actualizarStatsWarframeAsync();
+    }//GEN-LAST:event_cmb_mods_wf_8ActionPerformed
+
+    private void cmb_mods_wf_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_mods_wf_2ActionPerformed
+        ControladorPrincipal.actualizarDisponibilidadModsWarframe();
+        ControladorPrincipal.actualizarStatsWarframeAsync();
+    }//GEN-LAST:event_cmb_mods_wf_2ActionPerformed
+
+    private void cmb_mods_wf_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_mods_wf_1ActionPerformed
+        ControladorPrincipal.actualizarDisponibilidadModsWarframe();
+        ControladorPrincipal.actualizarStatsWarframeAsync();
+    }//GEN-LAST:event_cmb_mods_wf_1ActionPerformed
+
+    private void btn_guardarBuildArmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarBuildArmaActionPerformed
+        String nombre = JOptionPane.showInputDialog(this, "Nombre de la build:");
+        if (nombre != null && !nombre.trim().isEmpty()) {
+            String descripcion = JOptionPane.showInputDialog(this, "Descripción (opcional):");
+            ControladorPrincipal.guardarBuildArma(nombre, descripcion);
+        } else {
+            JOptionPane.showMessageDialog(panel_menu, "El nombre no puede estar vacio", "Alerta", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btn_guardarBuildArmaActionPerformed
+
+    private void btn_guardarBuildWarframeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarBuildWarframeActionPerformed
+        String nombre = JOptionPane.showInputDialog(this, "Nombre de la build:");
+        if (nombre != null && !nombre.trim().isEmpty()) {
+            String descripcion = JOptionPane.showInputDialog(this, "Descripción (opcional):");
+            ControladorPrincipal.guardarBuildWarframe(nombre, descripcion);
+        } else {
+            JOptionPane.showMessageDialog(panel_menu, "El nombre no puede estar vacio", "Alerta", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btn_guardarBuildWarframeActionPerformed
+
+    private void btn_cerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cerrarSesionActionPerformed
+        Object[] opciones = {"Sí", "No"};
+
+        int respuesta = JOptionPane.showOptionDialog(
+                this,
+                "¿Estás seguro de que quieres cerrar sesión?",
+                "Confirmar cierre de sesión",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null, // Icono personalizado (null = por defecto)
+                opciones, // Array con el texto de los botones
+                opciones[1] // Botón por defecto ("No")
+        );
+
+        if (respuesta == 0) {  // 0 = primer botón ("Sí")
+            ControladorPrincipal.cerrarSesion();
+        }
+    }//GEN-LAST:event_btn_cerrarSesionActionPerformed
+
+    private void btn_buildsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buildsActionPerformed
+        panel_pantalla.removeAll();
+        panel_pantalla.add(panel_builds);
+        panel_pantalla.repaint();
+        panel_pantalla.revalidate();
+        String tipo = (String) cmb_tipo_build.getSelectedItem();
+        ControladorPrincipal.cargarListaBuilds(tipo, list_builds);
+    }//GEN-LAST:event_btn_buildsActionPerformed
+
+    private void cmb_tipo_buildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_tipo_buildActionPerformed
+        String tipo = (String) cmb_tipo_build.getSelectedItem();
+        ControladorPrincipal.cargarListaBuilds(tipo, list_builds);
+        txt_descripcion.setText("");
+    }//GEN-LAST:event_cmb_tipo_buildActionPerformed
+
+    private void btn_cargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cargarActionPerformed
+        Build buildSeleccionada = list_builds.getSelectedValue();
+        if (buildSeleccionada != null) {
+            ControladorPrincipal.cargarBuild(buildSeleccionada.getId());
+            //this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecciona una build primero");
+        }
+    }//GEN-LAST:event_btn_cargarActionPerformed
+
+    private void btn_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminarActionPerformed
+        Build buildSeleccionada = list_builds.getSelectedValue();
+        if (buildSeleccionada != null) {
+            ControladorPrincipal.eliminarBuild(buildSeleccionada.getId());
+            // Recargar lista
+            String tipo = (String) cmb_tipo_build.getSelectedItem();
+            ControladorPrincipal.cargarListaBuilds(tipo, list_builds);
+            txt_descripcion.setText("");
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecciona una build primero");
+        }
+    }//GEN-LAST:event_btn_eliminarActionPerformed
+
+    private void list_buildsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_list_buildsValueChanged
+        if (!evt.getValueIsAdjusting()) {
+            Build buildSeleccionada = list_builds.getSelectedValue();
+            if (buildSeleccionada != null) {
+                // Mostrar descripción
+                String desc = buildSeleccionada.getDescripcion();
+                txt_descripcion.setText(desc != null ? desc : "Sin descripción");
+            }
+        }
+    }//GEN-LAST:event_list_buildsValueChanged
+
+    private void btn_limpiar_mods_warframeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limpiar_mods_warframeActionPerformed
+        ControladorPrincipal.resetearModsWarframe();
+    }//GEN-LAST:event_btn_limpiar_mods_warframeActionPerformed
+
+    private void btn_limpiar_mods_armaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limpiar_mods_armaActionPerformed
+        ControladorPrincipal.resetearModsArma();
+    }//GEN-LAST:event_btn_limpiar_mods_armaActionPerformed
 
     public JComboBox<Arma> getCmb_armas() {
         return cmb_armas;
@@ -493,22 +1079,53 @@ public class Ventana extends javax.swing.JFrame {
     public void setCmb_warframes(JComboBox<Warframe> cmb_warframes) {
         this.cmb_warframes = cmb_warframes;
     }
- 
+
+    // Para los labels de stats de arma
     public JLabel[] getLabelsArray() {
-        return new JLabel[]{label1,label2,label3,label4,label5,label6,
-                label7,label8,label9,label10,label11,label12};
+        return new JLabel[]{
+            label1, label2, label3, label4, label5, label6,
+            label7, label8, label9, label10, label11, label12,
+            label13, label14, label15, label16, label17, label18
+        };
     }
-    
+
+    // Para los combos de mods de arma
     public JComboBox[] getCombosMods() {
-        return new JComboBox[]{ cmb_mods_1, cmb_mods_2, cmb_mods_3, cmb_mods_4, cmb_mods_5, cmb_mods_6, cmb_mods_7, cmb_mods_8 };
+        return new JComboBox[]{cmb_mods_1, cmb_mods_2, cmb_mods_3, cmb_mods_4, cmb_mods_5, cmb_mods_6, cmb_mods_7, cmb_mods_8};
     }
-    
+
+    private Map<String, Double> statsBaseWarframe = new HashMap<>();
+
+    public void setValorBaseWarframe(String stat, double valor) {
+        statsBaseWarframe.put(stat, valor);
+    }
+
+    public double getValorBaseWarframe(String stat) {
+        return statsBaseWarframe.getOrDefault(stat, 0.0);
+    }
+
+    // Para los combos de mods de warframe
+    public JComboBox[] getCombosModsWarframe() {
+        return new JComboBox[]{
+            cmb_mods_wf_1, cmb_mods_wf_2, cmb_mods_wf_3, cmb_mods_wf_4,
+            cmb_mods_wf_5, cmb_mods_wf_6, cmb_mods_wf_7, cmb_mods_wf_8
+        };
+    }
+
+    // Para los labels de stats de warframe
+    public JLabel[] getLabelsWarframe() {
+        return new JLabel[]{
+            label_wf_1, label_wf_2, label_wf_3, label_wf_4,
+            label_wf_5, label_wf_6, label_wf_7, label_wf_8
+        };
+    }
+
     public String[] getOrdenStats() {
-        return new String[]{"impacto", "perforante", "cortante", "frio", "electrico", "calor", "toxina", "critico", "mult_critico", "estado", "precision", "cadencia" };
+        return new String[]{"impacto", "perforante", "cortante", "frio", "electrico", "calor", "toxina", "critico", "mult_critico", "estado", "precision", "cadencia"};
     }
-    
+
     private Map<String, Double> statsBase = new HashMap<>();
-    
+
     public void setValorBase(String stat, double valor) {
         statsBase.put(stat, valor);
     }
@@ -518,8 +1135,16 @@ public class Ventana extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_armas;
-    private javax.swing.JButton btn_warframes;
+    public javax.swing.JButton btn_armas;
+    public javax.swing.JButton btn_builds;
+    private javax.swing.JButton btn_cargar;
+    private javax.swing.JButton btn_cerrarSesion;
+    private javax.swing.JButton btn_eliminar;
+    private javax.swing.JButton btn_guardarBuildArma;
+    private javax.swing.JButton btn_guardarBuildWarframe;
+    private javax.swing.JButton btn_limpiar_mods_arma;
+    private javax.swing.JButton btn_limpiar_mods_warframe;
+    public javax.swing.JButton btn_warframes;
     private javax.swing.JComboBox<Arma> cmb_armas;
     private javax.swing.JComboBox<Mod> cmb_mods_1;
     private javax.swing.JComboBox<Mod> cmb_mods_2;
@@ -529,9 +1154,31 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JComboBox<Mod> cmb_mods_6;
     private javax.swing.JComboBox<Mod> cmb_mods_7;
     private javax.swing.JComboBox<Mod> cmb_mods_8;
+    private javax.swing.JComboBox<Mod> cmb_mods_wf_1;
+    private javax.swing.JComboBox<Mod> cmb_mods_wf_2;
+    private javax.swing.JComboBox<Mod> cmb_mods_wf_3;
+    private javax.swing.JComboBox<Mod> cmb_mods_wf_4;
+    private javax.swing.JComboBox<Mod> cmb_mods_wf_5;
+    private javax.swing.JComboBox<Mod> cmb_mods_wf_6;
+    private javax.swing.JComboBox<Mod> cmb_mods_wf_7;
+    private javax.swing.JComboBox<Mod> cmb_mods_wf_8;
+    private javax.swing.JComboBox<String> cmb_tipo_build;
     private javax.swing.JComboBox<Warframe> cmb_warframes;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -540,10 +1187,17 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel label1;
     private javax.swing.JLabel label10;
     private javax.swing.JLabel label11;
     private javax.swing.JLabel label12;
+    private javax.swing.JLabel label13;
+    private javax.swing.JLabel label14;
+    private javax.swing.JLabel label15;
+    private javax.swing.JLabel label16;
+    private javax.swing.JLabel label17;
+    private javax.swing.JLabel label18;
     private javax.swing.JLabel label2;
     private javax.swing.JLabel label3;
     private javax.swing.JLabel label4;
@@ -552,10 +1206,22 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JLabel label7;
     private javax.swing.JLabel label8;
     private javax.swing.JLabel label9;
+    private javax.swing.JLabel label_wf_1;
+    private javax.swing.JLabel label_wf_2;
+    private javax.swing.JLabel label_wf_3;
+    private javax.swing.JLabel label_wf_4;
+    private javax.swing.JLabel label_wf_5;
+    private javax.swing.JLabel label_wf_6;
+    private javax.swing.JLabel label_wf_7;
+    private javax.swing.JLabel label_wf_8;
+    private javax.swing.JLabel lbl_stats2;
+    private javax.swing.JList<Build> list_builds;
     public javax.swing.JPanel panel_armas;
     private javax.swing.JPanel panel_builds;
     private javax.swing.JPanel panel_menu;
     private javax.swing.JPanel panel_pantalla;
-    private javax.swing.JPanel panel_warframes;
+    public javax.swing.JPanel panel_warframes;
+    private javax.swing.JScrollPane scrollpane;
+    private javax.swing.JTextArea txt_descripcion;
     // End of variables declaration//GEN-END:variables
 }

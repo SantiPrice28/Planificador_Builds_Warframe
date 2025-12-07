@@ -12,21 +12,24 @@ public class Mod {
     private int id;
     private String nombre;
     private String tipoObjeto;
-    private String caregoria;
-    private int id_tipo_arma;
+    private String categoria;
+    private int idTipoArma;
     private String efecto;
     private String rareza;
 
+    public Mod() {}
+    
     public Mod(int id, String nombre, String tipoObjeto, String caregoria, int id_tipo_arma, String efecto, String rareza) {
         this.id = id;
         this.nombre = nombre;
         this.tipoObjeto = tipoObjeto;
-        this.caregoria = caregoria;
-        this.id_tipo_arma = id_tipo_arma;
+        this.categoria = caregoria;
+        this.idTipoArma = id_tipo_arma;
         this.efecto = efecto;
         this.rareza = rareza;
     }
 
+    //Getters y setters
     public int getId() {
         return id;
     }
@@ -51,20 +54,20 @@ public class Mod {
         this.tipoObjeto = tipoObjeto;
     }
 
-    public String getCaregoria() {
-        return caregoria;
+    public String getCategoria() {
+        return categoria;
     }
 
-    public void setCaregoria(String caregoria) {
-        this.caregoria = caregoria;
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 
-    public int getId_tipo_arma() {
-        return id_tipo_arma;
+    public int getIdTipoArma() {
+        return idTipoArma;
     }
 
-    public void setId_tipo_arma(int id_tipo_arma) {
-        this.id_tipo_arma = id_tipo_arma;
+    public void setIdTipoArma(int idTipoArma) {
+        this.idTipoArma = idTipoArma;
     }
 
     public String getEfecto() {

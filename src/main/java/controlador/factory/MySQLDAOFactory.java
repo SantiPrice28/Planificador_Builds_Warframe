@@ -60,5 +60,15 @@ public class MySQLDAOFactory extends DAOFactory {
     public ModDAO getModDAO() {
         return new ModDAO();
     }
+
+    @Override
+    public TipoArmaDAO getTipoArmaDAO() {
+        return new TipoArmaDAO();
+    }
+
+    @Override
+    public BuildDAO getBuildDAO() {
+        return new BuildDAO();
+    }
     
 }

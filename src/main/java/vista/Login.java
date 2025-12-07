@@ -36,8 +36,10 @@ public class Login extends javax.swing.JFrame {
         txt_usuario = new javax.swing.JTextField();
         txt_contrasena = new javax.swing.JPasswordField();
         btn_conectar = new javax.swing.JButton();
+        btn_registrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Planificador Builds Warframe");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -48,14 +50,17 @@ public class Login extends javax.swing.JFrame {
 
         jLabel2.setText("Contraseña");
 
-        txt_usuario.setText("Santi");
-
-        txt_contrasena.setText("prueba");
-
         btn_conectar.setText("Conectar");
         btn_conectar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_conectarActionPerformed(evt);
+            }
+        });
+
+        btn_registrar.setText("Crear usuario");
+        btn_registrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_registrarActionPerformed(evt);
             }
         });
 
@@ -65,8 +70,11 @@ public class Login extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(197, 197, 197)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_conectar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btn_conectar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_registrar))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel2)
@@ -89,7 +97,9 @@ public class Login extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(txt_contrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(44, 44, 44)
-                .addComponent(btn_conectar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_conectar)
+                    .addComponent(btn_registrar))
                 .addContainerGap(173, Short.MAX_VALUE))
         );
 
@@ -104,6 +114,12 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
         ControladorPrincipal.iniciaFactory();
     }//GEN-LAST:event_formWindowOpened
+
+    private void btn_registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_registrarActionPerformed
+        Registro ventanaRegistro = new Registro();
+        ventanaRegistro.setVisible(true);
+        ventanaRegistro.setLocationRelativeTo(this);
+    }//GEN-LAST:event_btn_registrarActionPerformed
 
     public JPasswordField getTxt_contrasena() {
         return txt_contrasena;
@@ -124,6 +140,7 @@ public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_conectar;
+    private javax.swing.JButton btn_registrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPasswordField txt_contrasena;

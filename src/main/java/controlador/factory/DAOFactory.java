@@ -34,4 +34,6 @@ public abstract class DAOFactory {
         public abstract ArmaDAO getArmaDAO();
         public abstract WarframeDAO getWarframeDAO();
         public abstract ModDAO getModDAO();
+        public abstract TipoArmaDAO getTipoArmaDAO();
+        public abstract BuildDAO getBuildDAO();
 }

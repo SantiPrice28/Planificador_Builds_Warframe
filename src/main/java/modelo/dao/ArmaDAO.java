@@ -9,9 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JTextArea;
 import modelo.vo.Arma;
-import modelo.vo.Warframe;
+import modelo.vo.TipoArma;
 import vista.Ventana;
 
 /**
@@ -56,7 +55,7 @@ public class ArmaDAO {
             return;
         }
 
-        // 1️⃣ Guardar stats base en el mapa
+        // Guardar stats base en el mapa
         vista_principal.setValorBase("impacto", arma.getDañoImpacto());
         vista_principal.setValorBase("perforante", arma.getDañoPerforante());
         vista_principal.setValorBase("cortante", arma.getDañoCortante());
@@ -72,41 +71,66 @@ public class ArmaDAO {
         vista_principal.setValorBase("precision", arma.getPrecision());
         vista_principal.setValorBase("cadencia", arma.getCadencia());
 
-        // 2️⃣ Rellenar labels con los textos “bonitos”
+        // Ocultar todos los labels
         for (JLabel lbl : labelsArray) {
             lbl.setVisible(false);
         }
 
+        //Vamos filtrando los que sean mayor a 0
         List<String> textos = new ArrayList<>();
 
+        // === Daños físicos ===
         if (arma.getDañoImpacto() > 0) {
             textos.add("Impacto: " + arma.getDañoImpacto());
         }
+
         if (arma.getDañoPerforante() > 0) {
             textos.add("Perforante: " + arma.getDañoPerforante());
         }
+
         if (arma.getDañoCortante() > 0) {
             textos.add("Cortante: " + arma.getDañoCortante());
         }
+
+        // === Daños elementales ===
         if (arma.getDañoFrio() > 0) {
             textos.add("Frío: " + arma.getDañoFrio());
         }
+
         if (arma.getDañoElectrico() > 0) {
             textos.add("Eléctrico: " + arma.getDañoElectrico());
         }
+
         if (arma.getDañoCalor() > 0) {
             textos.add("Calor: " + arma.getDañoCalor());
         }
+
         if (arma.getDañoToxina() > 0) {
             textos.add("Toxina: " + arma.getDañoToxina());
         }
 
-        textos.add("Crítico: " + arma.getCritico());
-        textos.add("Mult. Crítico: " + arma.getMultCritico());
-        textos.add("Estado: " + arma.getEstado());
-        textos.add("Precisión: " + arma.getPrecision());
-        textos.add("Cadencia: " + arma.getCadencia());
+        // === Stats generales ===
+        if (arma.getCritico() > 0) {
+            textos.add("Crítico: " + arma.getCritico());
+        }
 
+        if (arma.getMultCritico() > 0) {
+            textos.add("Mult. Crítico: " + arma.getMultCritico());
+        }
+
+        if (arma.getEstado() > 0) {
+            textos.add("Estado: " + arma.getEstado());
+        }
+
+        if (arma.getPrecision() > 0) {
+            textos.add("Precisión: " + arma.getPrecision());
+        }
+
+        if (arma.getCadencia() > 0) {
+            textos.add("Cadencia: " + arma.getCadencia());
+        }
+
+        // Mostrar solo los necesarios
         for (int i = 0; i < textos.size() && i < labelsArray.length; i++) {
             labelsArray[i].setText(textos.get(i));
             labelsArray[i].setVisible(true);
@@ -115,5 +139,4 @@ public class ArmaDAO {
         vista_principal.panel_armas.revalidate();
         vista_principal.panel_armas.repaint();
     }
-
 }

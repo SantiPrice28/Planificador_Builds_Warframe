@@ -29,8 +29,7 @@ public class ModEfecto {
         this.atributo = atributo;
     }
     
-    
-
+    // Getters y Setters
     public int getId() {
         return id;
     }

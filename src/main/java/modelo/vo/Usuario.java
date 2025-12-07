@@ -11,17 +11,19 @@ package modelo.vo;
 public class Usuario {
     private int id;
     private String nombreUsuario;
-    private String email;
     private String contraseña;
 
-    public Usuario(int id, String nombreUsuario, String email, String contraseña) {
+    // Constructor vacío
+    public Usuario() {
+    }
+
+    public Usuario(int id, String nombreUsuario, String contraseña) {
         this.id = id;
         this.nombreUsuario = nombreUsuario;
-        this.email = email;
         this.contraseña = contraseña;
     }
 
-    // Getters y setters
+    // Getters y Setters
     public int getId() {
         return id;
     }
@@ -38,14 +40,6 @@ public class Usuario {
         this.nombreUsuario = nombreUsuario;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getContraseña() {
         return contraseña;
     }
@@ -53,5 +47,9 @@ public class Usuario {
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
     }
-}
 
+    @Override
+    public String toString() {
+        return nombreUsuario;
+    }
+}
