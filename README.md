@@ -1,4 +1,5 @@
 Planificador de Builds de Warframe 🚀
+
 Este proyecto es una aplicación de escritorio desarrollada en JavaFX diseñada para ayudar a los jugadores de Warframe a planificar sus configuraciones de mods sin necesidad de gastar recursos in-game (Endo o Créditos). Permite visualizar el impacto estadístico de cada mod en Warframes y armas de forma dinámica.
 
 🛠️ Requisitos previos
