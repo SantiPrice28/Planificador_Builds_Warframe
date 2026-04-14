@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.shape.Line?>
+
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" 
+      fx:controller="vista.RegistroController" stylesheets="@warframe-theme.css" styleClass="root-pane">
+    
+    <padding>
+        <Insets top="30" right="40" bottom="30" left="40"/>
+    </padding>
+
+    <VBox alignment="CENTER" styleClass="logo-area" spacing="5">
+        <Label text="NUEVO TENNO" styleClass="page-title"/>
+        <Line startX="0" endX="150" stroke="#c5a45f" strokeWidth="2"/>
+    </VBox>
+    
+    <VBox spacing="15" maxWidth="250">
+        <VBox spacing="5">
+            <Label text="Nombre de Usuario" styleClass="stat-label"/>
+            <TextField fx:id="txtNombreUsuario" styleClass="item-select" promptText="Nombre..."/>
+        </VBox>
+
+        <VBox spacing="5">
+            <Label text="Contraseña" styleClass="stat-label"/>
+            <PasswordField fx:id="txtContrasena" styleClass="item-select" promptText="Contraseña..."/>
+        </VBox>
+
+        <VBox spacing="5">
+            <Label text="Repetir Contraseña" styleClass="stat-label"/>
+            <PasswordField fx:id="txtContrasenaRepetir" styleClass="item-select" promptText="Repetir contraseña..."/>
+        </VBox>
+    </VBox>
+
+    <HBox spacing="15" alignment="CENTER" styleClass="action-buttons">
+        <Button text="CANCELAR" onAction="#handleCancelar" styleClass="btn, btn-danger" prefWidth="110"/>
+        <Button text="REGISTRAR" onAction="#handleRegistrar" styleClass="btn" prefWidth="110"/>
+    </HBox>
+</VBox>

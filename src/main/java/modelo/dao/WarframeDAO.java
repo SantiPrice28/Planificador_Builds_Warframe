@@ -13,7 +13,6 @@ import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import modelo.vo.Warframe;
-import vista.Ventana;
 
 /**
  *
@@ -45,22 +44,22 @@ public class WarframeDAO {
     }
 
     public void cargarStatsBaseWarframe(Connection conn, JComboBox<Warframe> cmb_warframes,
-            JLabel[] labelsArray, Ventana vista_principal) {
+            JLabel[] labelsArray) {
 
         Warframe warframe = (Warframe) cmb_warframes.getSelectedItem();
         if (warframe == null) {
             return;
         }
 
-        //Guardar stats base en el mapa
-        vista_principal.setValorBaseWarframe("salud", warframe.getSalud());
-        vista_principal.setValorBaseWarframe("escudo", warframe.getEscudo());
-        vista_principal.setValorBaseWarframe("armadura", warframe.getArmadura());
-        vista_principal.setValorBaseWarframe("energia", warframe.getEnergia());
-        vista_principal.setValorBaseWarframe("duracion", warframe.getDuracion());
-        vista_principal.setValorBaseWarframe("eficiencia", warframe.getEficiencia());
-        vista_principal.setValorBaseWarframe("fuerza", warframe.getFuerza());
-        vista_principal.setValorBaseWarframe("rango", warframe.getRango());
+//        //Guardar stats base en el mapa
+//        vista_principal.setValorBaseWarframe("salud", warframe.getSalud());
+//        vista_principal.setValorBaseWarframe("escudo", warframe.getEscudo());
+//        vista_principal.setValorBaseWarframe("armadura", warframe.getArmadura());
+//        vista_principal.setValorBaseWarframe("energia", warframe.getEnergia());
+//        vista_principal.setValorBaseWarframe("duracion", warframe.getDuracion());
+//        vista_principal.setValorBaseWarframe("eficiencia", warframe.getEficiencia());
+//        vista_principal.setValorBaseWarframe("fuerza", warframe.getFuerza());
+//        vista_principal.setValorBaseWarframe("rango", warframe.getRango());
 
         //️Ocultar todos los labels
         for (JLabel lbl : labelsArray) {
@@ -87,8 +86,8 @@ public class WarframeDAO {
             labelsArray[i].setVisible(true);
         }
 
-        vista_principal.panel_warframes.revalidate();
-        vista_principal.panel_warframes.repaint();
+//        vista_principal.panel_warframes.revalidate();
+//        vista_principal.panel_warframes.repaint();
     }
 
 }

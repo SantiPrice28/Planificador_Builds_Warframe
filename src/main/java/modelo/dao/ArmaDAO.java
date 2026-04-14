@@ -11,7 +11,6 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import modelo.vo.Arma;
 import modelo.vo.TipoArma;
-import vista.Ventana;
 
 /**
  *
@@ -48,28 +47,28 @@ public class ArmaDAO {
     }
 
     public void cargarStatsBaseArmas(Connection conn, JComboBox<Arma> cmb_armas,
-            JLabel[] labelsArray, Ventana vista_principal) {
+            JLabel[] labelsArray) {
 
         Arma arma = (Arma) cmb_armas.getSelectedItem();
         if (arma == null) {
             return;
         }
 
-        // Guardar stats base en el mapa
-        vista_principal.setValorBase("impacto", arma.getDañoImpacto());
-        vista_principal.setValorBase("perforante", arma.getDañoPerforante());
-        vista_principal.setValorBase("cortante", arma.getDañoCortante());
-
-        vista_principal.setValorBase("frio", arma.getDañoFrio());
-        vista_principal.setValorBase("electrico", arma.getDañoElectrico());
-        vista_principal.setValorBase("calor", arma.getDañoCalor());
-        vista_principal.setValorBase("toxina", arma.getDañoToxina());
-
-        vista_principal.setValorBase("critico", arma.getCritico());
-        vista_principal.setValorBase("mult_critico", arma.getMultCritico());
-        vista_principal.setValorBase("estado", arma.getEstado());
-        vista_principal.setValorBase("precision", arma.getPrecision());
-        vista_principal.setValorBase("cadencia", arma.getCadencia());
+//        // Guardar stats base en el mapa
+//        vista_principal.setValorBase("impacto", arma.getDañoImpacto());
+//        vista_principal.setValorBase("perforante", arma.getDañoPerforante());
+//        vista_principal.setValorBase("cortante", arma.getDañoCortante());
+//
+//        vista_principal.setValorBase("frio", arma.getDañoFrio());
+//        vista_principal.setValorBase("electrico", arma.getDañoElectrico());
+//        vista_principal.setValorBase("calor", arma.getDañoCalor());
+//        vista_principal.setValorBase("toxina", arma.getDañoToxina());
+//
+//        vista_principal.setValorBase("critico", arma.getCritico());
+//        vista_principal.setValorBase("mult_critico", arma.getMultCritico());
+//        vista_principal.setValorBase("estado", arma.getEstado());
+//        vista_principal.setValorBase("precision", arma.getPrecision());
+//        vista_principal.setValorBase("cadencia", arma.getCadencia());
 
         // Ocultar todos los labels
         for (JLabel lbl : labelsArray) {
@@ -136,7 +135,7 @@ public class ArmaDAO {
             labelsArray[i].setVisible(true);
         }
 
-        vista_principal.panel_armas.revalidate();
-        vista_principal.panel_armas.repaint();
+//        vista_principal.panel_armas.revalidate();
+//        vista_principal.panel_armas.repaint();
     }
 }
