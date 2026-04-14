@@ -33,20 +33,12 @@ public class ControladorPrincipal {
     
     public static ArmaDAO armDAO;
     public static BuildDAO buildDAO;
-    //public static ModDAO modDAO;
+    //public static ModDAO modDAO;   //Está comentado porque genera errores, tengo que adaptarlo a JavaFX
     public static TipoArmaDAO tipoArmaDAO;
     public static WarframeDAO warDAO;
 
-    // ELIMINAMOS LAS REFERENCIAS A LAS VISTAS ANTIGUAS DE SWING:
-    // public static Login vista_login = new Login();
-    // public static Ventana vista_principal = new Ventana();
-
     public static Usuario usuarioActual = null;
 
-    // Eliminamos el antiguo iniciar() de Swing:
-    // public static void iniciar() { ... }
-
-    // --- NUEVO MÉTODO PARA INICIAR EL POOL DE CONEXIONES ---
     public static void iniciaFactory() {
         try {
             mySQLFactory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
@@ -55,7 +47,6 @@ public class ControladorPrincipal {
         }
     }
 
-    // --- NUEVO MÉTODO PARA LOGIN JAVAFX ---
     public static void loginJavaFX(String usuario, String contrasena, LoginController vistaController) {
         Connection conn = null;
         try {
@@ -80,7 +71,6 @@ public class ControladorPrincipal {
         }
     }
 
-    // --- NUEVO MÉTODO PARA REGISTRO JAVAFX ---
     public static void registrarUsuarioFX(String nombreUsuario, String contrasena, vista.RegistroController vistaController) {
         java.sql.Connection conn = null;
         try {
@@ -106,14 +96,14 @@ public class ControladorPrincipal {
                 return;
             }
 
-            // Verificar si ya existe usando tu método original
+            // Verificar si ya existe el usuario
             if (usuarioDAO.existeNombreUsuario(conn, nombreUsuario)) {
                 vistaController.mostrarError("El nombre de usuario ya existe");
                 mySQLFactory.releaseConnection(conn);
                 return;
             }
 
-            // ENCRIPTAR CONTRASEÑA usando tu método original
+            // ENCRIPTAR CONTRASEÑA
             String hashContraseña = modelo.util.PasswordUtil.encriptarPassword(contrasena);
 
             // Crear usuario
@@ -121,7 +111,7 @@ public class ControladorPrincipal {
             nuevoUsuario.setNombreUsuario(nombreUsuario);
             nuevoUsuario.setContraseña(hashContraseña);
 
-            // Llamada a tu método original que devuelve el ID generado
+            // Llamada que devuelve el ID generado
             int idGenerado = usuarioDAO.crearUsuario(conn, nuevoUsuario);
 
             // Commit
