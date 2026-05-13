@@ -12,7 +12,7 @@ public class Planificador_Builds_Warframe extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         // Carga la vista del Login al arrancar.
-        Parent root = FXMLLoader.load(getClass().getResource("/vista/Registro.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/vista/Login.fxml"));
         primaryStage.setTitle("Planificador Builds Warframe - Login");
         primaryStage.setScene(new Scene(root, 600, 500));
         primaryStage.show();

@@ -18,6 +18,24 @@ import modelo.vo.TipoArma;
  */
 public class ArmaDAO {
 
+    //Metodo para JavaFX
+    public List<Arma> listarArmas(Connection conn) throws SQLException {
+    List<Arma> lista = new ArrayList<>();
+    String sql = "SELECT * FROM arma";
+    try (Statement sent = conn.createStatement(); ResultSet rs = sent.executeQuery(sql)) {
+        while (rs.next()) {
+            lista.add(new Arma(
+                rs.getInt("id"), rs.getString("nombre"), rs.getInt("id_tipo_arma"),
+                rs.getDouble("dano_impacto"), rs.getDouble("dano_perforante"), rs.getDouble("dano_cortante"),
+                rs.getDouble("dano_frio"), rs.getDouble("dano_electrico"), rs.getDouble("dano_calor"),
+                rs.getDouble("dano_toxina"), rs.getDouble("critico"), rs.getDouble("mult_critico"),
+                rs.getDouble("estado"), rs.getDouble("precision"), rs.getDouble("cadencia"), rs.getString("descripcion")
+            ));
+        }
+    }
+    return lista;
+}
+    
     public void cargarArmasCombo(Connection conn, JComboBox<Arma> combo) throws SQLException {
         String sql = "SELECT * FROM arma";
         Statement sent = conn.createStatement();

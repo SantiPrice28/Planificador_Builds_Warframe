@@ -20,12 +20,12 @@
     <VBox spacing="15" maxWidth="300">
         <VBox spacing="5">
             <Label text="Usuario" styleClass="stat-label"/>
-            <TextField fx:id="txtUsuario" styleClass="item-select" promptText="Nombre de usuario..."/>
+            <TextField fx:id="txtUsuario" styleClass="item-select" promptText=""/>
         </VBox>
 
         <VBox spacing="5">
             <Label text="Contraseña" styleClass="stat-label"/>
-            <PasswordField fx:id="txtContrasena" styleClass="item-select" promptText="Contraseña..."/>
+            <PasswordField fx:id="txtContrasena" styleClass="item-select" promptText=""/>
         </VBox>
     </VBox>
 

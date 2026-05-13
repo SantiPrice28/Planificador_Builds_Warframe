@@ -19,6 +19,23 @@ import modelo.vo.Warframe;
  * @author aizpu
  */
 public class WarframeDAO {
+    
+    //Metodo para JavaFX
+    public List<Warframe> listarWarframes(Connection conn) throws SQLException {
+    List<Warframe> lista = new ArrayList<>();
+    String sql = "SELECT * FROM warframe";
+    try (Statement sent = conn.createStatement(); ResultSet rs = sent.executeQuery(sql)) {
+        while (rs.next()) {
+            lista.add(new Warframe(
+                rs.getInt("id"), rs.getString("nombre"), rs.getInt("salud_base"),
+                rs.getInt("escudo_base"), rs.getInt("armadura_base"), rs.getInt("energia_base"),
+                rs.getString("descripcion"), rs.getDouble("duracion"), rs.getDouble("eficiencia"),
+                rs.getDouble("fuerza"), rs.getDouble("rango")
+            ));
+        }
+    }
+    return lista;
+}
 
     public void cargarWarframesCombo(Connection conn, JComboBox<Warframe> combo) throws SQLException {
         String sql = "SELECT * FROM warframe";

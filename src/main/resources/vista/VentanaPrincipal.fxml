@@ -1,4 +1,3 @@
-
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
@@ -28,6 +27,7 @@
     </VBox>
 
     <VBox styleClass="main-content" HBox.hgrow="ALWAYS">
+        
         <HBox styleClass="header" alignment="CENTER_LEFT">
             <Label fx:id="lblTituloSeccion" text="ARSENAL: WARFRAMES" styleClass="page-title" HBox.hgrow="ALWAYS"/>
             <Region HBox.hgrow="ALWAYS" />
@@ -38,85 +38,114 @@
             </HBox>
         </HBox>
 
-        <HBox spacing="40" VBox.vgrow="ALWAYS">
-            <VBox styleClass="mods-section" HBox.hgrow="ALWAYS">
-                <Label text="CONFIGURACIÓN DE MODS" styleClass="section-title"/>
-                
-                <GridPane styleClass="mods-grid" vgap="15" hgap="15" VBox.vgrow="ALWAYS">
-                    <columnConstraints>
-                        <ColumnConstraints percentWidth="25" /><ColumnConstraints percentWidth="25" />
-                        <ColumnConstraints percentWidth="25" /><ColumnConstraints percentWidth="25" />
-                    </columnConstraints>
-                    <rowConstraints>
-                        <RowConstraints percentHeight="50" /><RowConstraints percentHeight="50" />
-                    </rowConstraints>
+        <StackPane VBox.vgrow="ALWAYS">
+            
+            <HBox fx:id="panelArsenal" spacing="40">
+                <VBox styleClass="mods-section" HBox.hgrow="ALWAYS">
+                    <Label text="CONFIGURACIÓN DE MODS" styleClass="section-title"/>
+                    
+                    <GridPane styleClass="mods-grid" vgap="15" hgap="15" VBox.vgrow="ALWAYS">
+                        <columnConstraints>
+                            <ColumnConstraints percentWidth="25" />
+                            <ColumnConstraints percentWidth="25" />
+                            <ColumnConstraints percentWidth="25" />
+                            <ColumnConstraints percentWidth="25" />
+                        </columnConstraints>
+                        <rowConstraints>
+                            <RowConstraints percentHeight="50" />
+                            <RowConstraints percentHeight="50" />
+                        </rowConstraints>
 
-                    <Button fx:id="slotMod1" text="+" styleClass="mod-slot" GridPane.columnIndex="0" GridPane.rowIndex="0" maxWidth="Infinity" maxHeight="Infinity"/>
-                    <Button fx:id="slotMod2" text="+" styleClass="mod-slot" GridPane.columnIndex="1" GridPane.rowIndex="0" maxWidth="Infinity" maxHeight="Infinity"/>
-                    <Button fx:id="slotMod3" text="+" styleClass="mod-slot" GridPane.columnIndex="2" GridPane.rowIndex="0" maxWidth="Infinity" maxHeight="Infinity"/>
-                    <Button fx:id="slotMod4" text="+" styleClass="mod-slot" GridPane.columnIndex="3" GridPane.rowIndex="0" maxWidth="Infinity" maxHeight="Infinity"/>
-                    
-                    <Button fx:id="slotMod5" text="+" styleClass="mod-slot" GridPane.columnIndex="0" GridPane.rowIndex="1" maxWidth="Infinity" maxHeight="Infinity"/>
-                    <Button fx:id="slotMod6" text="+" styleClass="mod-slot" GridPane.columnIndex="1" GridPane.rowIndex="1" maxWidth="Infinity" maxHeight="Infinity"/>
-                    <Button fx:id="slotMod7" text="+" styleClass="mod-slot" GridPane.columnIndex="2" GridPane.rowIndex="1" maxWidth="Infinity" maxHeight="Infinity"/>
-                    <Button fx:id="slotMod8" text="+" styleClass="mod-slot" GridPane.columnIndex="3" GridPane.rowIndex="1" maxWidth="Infinity" maxHeight="Infinity"/>
-                </GridPane>
-            </VBox>
-
-            <VBox styleClass="stats-section" prefWidth="300" minWidth="300">
-                <Label text="ESTADÍSTICAS FINALES" styleClass="section-title"/>
-                
-                <VBox spacing="10" VBox.vgrow="ALWAYS">
-                    <HBox justify="SPACE_BETWEEN">
-                        <Label text="Salud" styleClass="stat-label"/>
-                        <Region HBox.hgrow="ALWAYS" />
-                        <Label fx:id="lblStatSalud" text="0" styleClass="stat-value"/>
-                    </HBox>
-                    <HBox justify="SPACE_BETWEEN">
-                        <Label text="Escudo" styleClass="stat-label"/>
-                        <Region HBox.hgrow="ALWAYS" />
-                        <Label fx:id="lblStatEscudo" text="0" styleClass="stat-value"/>
-                    </HBox>
-                    <HBox justify="SPACE_BETWEEN">
-                        <Label text="Armadura" styleClass="stat-label"/>
-                        <Region HBox.hgrow="ALWAYS" />
-                        <Label fx:id="lblStatArmadura" text="0" styleClass="stat-value"/>
-                    </HBox>
-                    <HBox justify="SPACE_BETWEEN">
-                        <Label text="Energía" styleClass="stat-label"/>
-                        <Region HBox.hgrow="ALWAYS" />
-                        <Label fx:id="lblStatEnergia" text="0" styleClass="stat-value"/>
-                    </HBox>
-                    
-                    <Line startX="0" endX="250" stroke="#333333" strokeWidth="1" />
-                    
-                    <HBox justify="SPACE_BETWEEN">
-                        <Label text="Duración" styleClass="stat-label"/>
-                        <Region HBox.hgrow="ALWAYS" />
-                        <Label fx:id="lblStatDuracion" text="100%" styleClass="stat-value"/>
-                    </HBox>
-                    <HBox justify="SPACE_BETWEEN">
-                        <Label text="Eficiencia" styleClass="stat-label"/>
-                        <Region HBox.hgrow="ALWAYS" />
-                        <Label fx:id="lblStatEficiencia" text="100%" styleClass="stat-value"/>
-                    </HBox>
-                    <HBox justify="SPACE_BETWEEN">
-                        <Label text="Rango" styleClass="stat-label"/>
-                        <Region HBox.hgrow="ALWAYS" />
-                        <Label fx:id="lblStatRango" text="100%" styleClass="stat-value"/>
-                    </HBox>
-                    <HBox justify="SPACE_BETWEEN">
-                        <Label text="Fuerza" styleClass="stat-label"/>
-                        <Region HBox.hgrow="ALWAYS" />
-                        <Label fx:id="lblStatFuerza" text="100%" styleClass="stat-value"/>
-                    </HBox>
+                        <Button fx:id="slotMod1" text="+" styleClass="mod-slot" GridPane.columnIndex="0" GridPane.rowIndex="0" maxWidth="Infinity" maxHeight="Infinity"/>
+                        <Button fx:id="slotMod2" text="+" styleClass="mod-slot" GridPane.columnIndex="1" GridPane.rowIndex="0" maxWidth="Infinity" maxHeight="Infinity"/>
+                        <Button fx:id="slotMod3" text="+" styleClass="mod-slot" GridPane.columnIndex="2" GridPane.rowIndex="0" maxWidth="Infinity" maxHeight="Infinity"/>
+                        <Button fx:id="slotMod4" text="+" styleClass="mod-slot" GridPane.columnIndex="3" GridPane.rowIndex="0" maxWidth="Infinity" maxHeight="Infinity"/>
+                        
+                        <Button fx:id="slotMod5" text="+" styleClass="mod-slot" GridPane.columnIndex="0" GridPane.rowIndex="1" maxWidth="Infinity" maxHeight="Infinity"/>
+                        <Button fx:id="slotMod6" text="+" styleClass="mod-slot" GridPane.columnIndex="1" GridPane.rowIndex="1" maxWidth="Infinity" maxHeight="Infinity"/>
+                        <Button fx:id="slotMod7" text="+" styleClass="mod-slot" GridPane.columnIndex="2" GridPane.rowIndex="1" maxWidth="Infinity" maxHeight="Infinity"/>
+                        <Button fx:id="slotMod8" text="+" styleClass="mod-slot" GridPane.columnIndex="3" GridPane.rowIndex="1" maxWidth="Infinity" maxHeight="Infinity"/>
+                    </GridPane>
                 </VBox>
 
-                <HBox spacing="10" styleClass="action-buttons">
-                    <Button text="LIMPIAR" styleClass="btn, btn-danger" HBox.hgrow="ALWAYS" maxWidth="Infinity" onAction="#limpiarMods"/>
-                    <Button text="GUARDAR BUILD" styleClass="btn" HBox.hgrow="ALWAYS" maxWidth="Infinity" onAction="#guardarBuild"/>
-                </HBox>
-            </VBox>
-        </HBox>
+                <VBox styleClass="stats-section" prefWidth="300" minWidth="300">
+                    <Label text="ESTADÍSTICAS FINALES" styleClass="section-title"/>
+                    
+                    <VBox spacing="10" VBox.vgrow="ALWAYS">
+                        <HBox fx:id="filaStat1" alignment="CENTER_LEFT">
+                            <Label fx:id="lblDesc1" text="Stat 1" styleClass="stat-label"/>
+                            <Region HBox.hgrow="ALWAYS" />
+                            <Label fx:id="lblVal1" text="0" styleClass="stat-value"/>
+                        </HBox>
+                        <HBox fx:id="filaStat2" alignment="CENTER_LEFT">
+                            <Label fx:id="lblDesc2" text="Stat 2" styleClass="stat-label"/>
+                            <Region HBox.hgrow="ALWAYS" />
+                            <Label fx:id="lblVal2" text="0" styleClass="stat-value"/>
+                        </HBox>
+                        <HBox fx:id="filaStat3" alignment="CENTER_LEFT">
+                            <Label fx:id="lblDesc3" text="Stat 3" styleClass="stat-label"/>
+                            <Region HBox.hgrow="ALWAYS" />
+                            <Label fx:id="lblVal3" text="0" styleClass="stat-value"/>
+                        </HBox>
+                        <HBox fx:id="filaStat4" alignment="CENTER_LEFT">
+                            <Label fx:id="lblDesc4" text="Stat 4" styleClass="stat-label"/>
+                            <Region HBox.hgrow="ALWAYS" />
+                            <Label fx:id="lblVal4" text="0" styleClass="stat-value"/>
+                        </HBox>
+                        
+                        <Line fx:id="lineaDivisoria" startX="0" endX="250" stroke="#333333" strokeWidth="1" />
+                        
+                        <HBox fx:id="filaStat5" alignment="CENTER_LEFT">
+                            <Label fx:id="lblDesc5" text="Stat 5" styleClass="stat-label"/>
+                            <Region HBox.hgrow="ALWAYS" />
+                            <Label fx:id="lblVal5" text="0" styleClass="stat-value"/>
+                        </HBox>
+                        <HBox fx:id="filaStat6" alignment="CENTER_LEFT">
+                            <Label fx:id="lblDesc6" text="Stat 6" styleClass="stat-label"/>
+                            <Region HBox.hgrow="ALWAYS" />
+                            <Label fx:id="lblVal6" text="0" styleClass="stat-value"/>
+                        </HBox>
+                        <HBox fx:id="filaStat7" alignment="CENTER_LEFT">
+                            <Label fx:id="lblDesc7" text="Stat 7" styleClass="stat-label"/>
+                            <Region HBox.hgrow="ALWAYS" />
+                            <Label fx:id="lblVal7" text="0" styleClass="stat-value"/>
+                        </HBox>
+                        <HBox fx:id="filaStat8" alignment="CENTER_LEFT">
+                            <Label fx:id="lblDesc8" text="Stat 8" styleClass="stat-label"/>
+                            <Region HBox.hgrow="ALWAYS" />
+                            <Label fx:id="lblVal8" text="0" styleClass="stat-value"/>
+                        </HBox>
+                        <HBox fx:id="filaStat9" alignment="CENTER_LEFT">
+                            <Label fx:id="lblDesc9" styleClass="stat-label"/>
+                            <Region HBox.hgrow="ALWAYS" />
+                            <Label fx:id="lblVal9" styleClass="stat-value"/>
+                        </HBox>
+                        <HBox fx:id="filaStat10" alignment="CENTER_LEFT">
+                            <Label fx:id="lblDesc10" styleClass="stat-label"/>
+                            <Region HBox.hgrow="ALWAYS" />
+                            <Label fx:id="lblVal10" styleClass="stat-value"/>
+                        </HBox>
+                        <HBox fx:id="filaStat11" alignment="CENTER_LEFT">
+                            <Label fx:id="lblDesc11" styleClass="stat-label"/>
+                            <Region HBox.hgrow="ALWAYS" />
+                            <Label fx:id="lblVal11" styleClass="stat-value"/>
+                        </HBox>
+                        <HBox fx:id="filaStat12" alignment="CENTER_LEFT">
+                            <Label fx:id="lblDesc12" styleClass="stat-label"/>
+                            <Region HBox.hgrow="ALWAYS" />
+                            <Label fx:id="lblVal12" styleClass="stat-value"/>
+                        </HBox>
+                    </VBox>
+
+                    <HBox spacing="10" styleClass="action-buttons">
+                        <Button text="LIMPIAR" styleClass="btn, btn-danger" HBox.hgrow="ALWAYS" maxWidth="Infinity" onAction="#limpiarMods"/>
+                        <Button text="GUARDAR BUILD" styleClass="btn" HBox.hgrow="ALWAYS" maxWidth="Infinity" onAction="#guardarBuild"/>
+                    </HBox>
+                </VBox>
+            </HBox>
+
+            <ListView fx:id="listaBuilds" visible="false" managed="false" styleClass="builds-list" />
+            
+        </StackPane>
     </VBox>
 </HBox>

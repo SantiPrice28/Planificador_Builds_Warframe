@@ -10,10 +10,12 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.control.Label;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -30,18 +32,25 @@ import vista.*;
 public class ControladorPrincipal {
 
     public static DAOFactory mySQLFactory;
-    
+
     public static ArmaDAO armDAO;
     public static BuildDAO buildDAO;
-    //public static ModDAO modDAO;   //Está comentado porque genera errores, tengo que adaptarlo a JavaFX
+    public static ModDAO modDAO;
     public static TipoArmaDAO tipoArmaDAO;
     public static WarframeDAO warDAO;
+    public static UsuarioDAO usuDAO;
 
     public static Usuario usuarioActual = null;
 
     public static void iniciaFactory() {
         try {
             mySQLFactory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
+            armDAO = new ArmaDAO();
+            buildDAO = new BuildDAO();
+            modDAO = new ModDAO();
+            tipoArmaDAO = new TipoArmaDAO();
+            warDAO = new WarframeDAO();
+            usuDAO = new UsuarioDAO();
         } catch (Exception ex) {
             Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -57,7 +66,7 @@ public class ControladorPrincipal {
             if (user != null && PasswordUtil.verificarPassword(contrasena, user.getContraseña())) {
                 usuarioActual = user;
                 System.out.println("¡Login exitoso! Abriendo programa...");
-                vistaController.abrirVentanaPrincipal(); 
+                vistaController.abrirVentanaPrincipal();
             } else {
                 vistaController.mostrarError("El usuario o la contraseña no son correctos.");
             }
@@ -153,6 +162,166 @@ public class ControladorPrincipal {
         } catch (Exception ex) {
             Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    /**
+     * MÉTODO CLAVE: Calcular estadísticas de Warframe Este método recibirá el
+     * Warframe base y los mods equipados, y actualizará los Labels
+     */
+    public static void calcularStatsWarframe(Warframe base, Mod[] mods,
+            Label lblSalud, Label lblEscudo,
+            Label lblArmadura, Label lblEnergia) {
+        if (base == null) {
+            return;
+        }
+
+        double saludFinal = base.getSalud();
+        double escudoFinal = base.getEscudo();
+        double armaduraFinal = base.getArmadura();
+        double energiaFinal = base.getEnergia();
+
+        // Recorremos los mods equipados para aplicar multiplicadores
+        for (Mod m : mods) {
+            if (m != null) {
+                // Aquí iría la lógica de buscar en mod_efecto y aplicar
+                // Por ahora un ejemplo simple:
+                if (m.getNombre().equals("Vitality")) {
+                    saludFinal += base.getSalud() * 1.0;
+                }
+                if (m.getNombre().equals("Redirection")) {
+                    escudoFinal += base.getEscudo() * 1.0;
+                }
+            }
+        }
+
+        // Actualizamos la interfaz
+        lblSalud.setText(String.valueOf((int) saludFinal));
+        lblEscudo.setText(String.valueOf((int) escudoFinal));
+        lblArmadura.setText(String.valueOf((int) armaduraFinal));
+        lblEnergia.setText(String.valueOf((int) energiaFinal));
+    }
+
+    //Combinaciones de daños elementales
+    public enum Elemento {
+        IMPACTO, PERFORACION, CORTANTE,
+        CALOR, FRIO, ELECTRICIDAD, TOXINA,
+        EXPLOSION, VIRAL, GAS, MAGNETICO, RADIACION, CORROSIVO;
+
+        public static Elemento combinar(Elemento e1, Elemento e2) {
+            if ((e1 == CALOR && e2 == FRIO) || (e1 == FRIO && e2 == CALOR)) {
+                return EXPLOSION;
+            }
+            if ((e1 == FRIO && e2 == TOXINA) || (e1 == TOXINA && e2 == FRIO)) {
+                return VIRAL;
+            }
+            if ((e1 == CALOR && e2 == TOXINA) || (e1 == TOXINA && e2 == CALOR)) {
+                return GAS;
+            }
+            if ((e1 == FRIO && e2 == ELECTRICIDAD) || (e1 == ELECTRICIDAD && e2 == FRIO)) {
+                return MAGNETICO;
+            }
+            if ((e1 == CALOR && e2 == ELECTRICIDAD) || (e1 == ELECTRICIDAD && e2 == CALOR)) {
+                return RADIACION;
+            }
+            if ((e1 == TOXINA && e2 == ELECTRICIDAD) || (e1 == ELECTRICIDAD && e2 == TOXINA)) {
+                return CORROSIVO;
+            }
+            return null;
+        }
+    }
+
+    //Metodo para alcular los daños combinados
+    public static Map<String, Double> calcularDanoFinal(Arma base, Mod[] mods) {
+        Map<String, Double> danosFinales = new LinkedHashMap<>();
+
+        double multDanoBase = 1.0;
+        double multMultishot = 1.0;
+        List<Elemento> elementosEnOrden = new ArrayList<>();
+        Map<Elemento, Double> porcentajesElementales = new HashMap<>();
+
+        // 1. Analizar mods
+        for (Mod m : mods) {
+            if (m == null) {
+                continue;
+            }
+            String ef = m.getEfecto().toLowerCase();
+
+            if (ef.contains("daño") && !ef.contains("impacto") && !ef.contains("perfor") && !ef.contains("cortan")) {
+                multDanoBase += extraerPorcentaje(ef);
+            }
+
+            Elemento e = null;
+            if (ef.contains("calor")) {
+                e = Elemento.CALOR;
+            } else if (ef.contains("frío")) {
+                e = Elemento.FRIO;
+            } else if (ef.contains("toxina")) {
+                e = Elemento.TOXINA;
+            }
+            else if (ef.contains("eléctrico") || ef.contains("electrico")) {
+                e = Elemento.ELECTRICIDAD;
+            }
+
+            if (e != null) {
+                elementosEnOrden.add(e);
+                porcentajesElementales.put(e, extraerPorcentaje(ef));
+            }
+        }
+
+        // 2. Calcular Daños Físicos
+        double imp = base.getDañoImpacto() * multDanoBase;
+        double perf = base.getDañoPerforante() * multDanoBase;
+        double cort = base.getDañoCortante() * multDanoBase;
+        double totalBase = base.getDañoImpacto() + base.getDañoPerforante() + base.getDañoCortante();
+
+        danosFinales.put("Impacto", imp);
+        danosFinales.put("Perforación", perf);
+        danosFinales.put("Cortante", cort);
+
+        // 3. Combinación Elemental (Igual que antes pero corregido)
+        int i = 0;
+        while (i < elementosEnOrden.size()) {
+            Elemento actual = elementosEnOrden.get(i);
+            if (i + 1 < elementosEnOrden.size()) {
+                Elemento siguiente = elementosEnOrden.get(i + 1);
+                Elemento combinado = Elemento.combinar(actual, siguiente);
+                if (combinado != null) {
+                    double danoCombo = (totalBase * multDanoBase) * (porcentajesElementales.get(actual) + porcentajesElementales.get(siguiente));
+                    danosFinales.put(combinado.name(), danoCombo);
+                    i += 2;
+                    continue;
+                }
+            }
+            double danoSimple = (totalBase * multDanoBase) * porcentajesElementales.get(actual);
+            danosFinales.put(actual.name(), danoSimple);
+            i++;
+        }
+
+        // 4. AÑADIR STATS FIJAS (Para que no desaparezcan)
+        danosFinales.put("Crítico", base.getCritico() * 100); // Lo enviamos como porcentaje
+        danosFinales.put("Multiplicador", base.getMultCritico());
+        danosFinales.put("Estado", base.getEstado() * 100);
+        danosFinales.put("Cadencia", base.getCadencia());
+
+        return danosFinales;
+    }
+
+    // Método auxiliar para sacar el número de "+90% Calor" -> 0.9
+    public static double extraerPorcentaje(String texto) {
+        if (texto == null || texto.isEmpty()) {
+            return 0.0;
+        }
+        try {
+            // Buscamos el primer número que aparezca en el texto
+            java.util.regex.Pattern p = java.util.regex.Pattern.compile("(\\d+(\\.\\d+)?)");
+            java.util.regex.Matcher m = p.matcher(texto);
+            if (m.find()) {
+                return Double.parseDouble(m.group(1)) / 100.0;
+            }
+        } catch (Exception e) {
+            return 0.0;
+        }
+        return 0.0;
     }
 
 //    public static void inicarPrograma() {

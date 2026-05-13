@@ -12,14 +12,70 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JComboBox;
+import modelo.vo.Arma;
 import modelo.vo.Mod;
 import modelo.vo.ModEfecto;
+import modelo.vo.Warframe;
 
 /**
  *
  * @author aizpu
  */
 public class ModDAO {
+
+    //Metodo para JavaFX
+    public List<Mod> listarTodosLosMods(Connection conn) throws SQLException {
+        List<Mod> lista = new ArrayList<>();
+        String sql = "SELECT * FROM `mod` ORDER BY nombre ASC";
+        try (Statement sent = conn.createStatement(); ResultSet rs = sent.executeQuery(sql)) {
+            while (rs.next()) {
+                lista.add(new Mod(
+                        rs.getInt("id"), rs.getString("nombre"), rs.getString("tipo_objeto"),
+                        rs.getString("categoria"), rs.getInt("id_tipo_arma"),
+                        rs.getString("efecto"), rs.getString("rareza")
+                ));
+            }
+        }
+        return lista;
+    }
+
+    public List<Mod> listarModsFiltrados(Connection conn, Object objetivo) throws SQLException {
+        List<Mod> lista = new ArrayList<>();
+        String sql = "";
+
+        if (objetivo instanceof Warframe) {
+            // Solo mods de Warframe
+            sql = "SELECT * FROM `mod` WHERE tipo_objeto = 'Warframe' ORDER BY nombre ASC";
+        } else if (objetivo instanceof Arma) {
+            Arma arma = (Arma) objetivo;
+            // Mods de la categoría del arma (Primaria/Secundaria/Melee) 
+            // Y que coincidan con el tipo específico (Rifle/Escopeta) o sean universales del grupo
+            sql = "SELECT m.* FROM `mod` m "
+                    + "INNER JOIN tipo_arma t ON m.id_tipo_arma = t.id OR m.id_tipo_arma IS NULL "
+                    + "WHERE m.tipo_objeto = 'Arma' "
+                    + "AND m.categoria = (SELECT categoria FROM tipo_arma WHERE id = ?) "
+                    + "AND (m.id_tipo_arma = ? OR m.id_tipo_arma IS NULL) "
+                    + "GROUP BY m.id ORDER BY m.nombre ASC";
+        }
+
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            if (objetivo instanceof Arma) {
+                Arma a = (Arma) objetivo;
+                ps.setInt(1, a.getIdTipoArma());
+                ps.setInt(2, a.getIdTipoArma());
+            }
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                lista.add(new Mod(
+                        rs.getInt("id"), rs.getString("nombre"), rs.getString("tipo_objeto"),
+                        rs.getString("categoria"), rs.getInt("id_tipo_arma"),
+                        rs.getString("efecto"), rs.getString("rareza")
+                ));
+            }
+        }
+        return lista;
+    }
 
     public List<ModEfecto> obtenerEfectosDeMod(Connection conn, int id) {
         List<ModEfecto> lista = new ArrayList<>();

@@ -82,11 +82,24 @@
     -fx-padding: 0 0 40 0;
 }
 
+/* Estilo base del selector */
 .item-select {
-    -fx-background-color: #1e1e1e;
-    -fx-text-fill: #e0e0e0;
-    -fx-border-color: #333333;
-    -fx-padding: 5;
+    -fx-background-color: #1a1a1a;
+    -fx-border-color: #333333; /* Gris oscuro */
+    -fx-border-width: 1;
+    -fx-text-fill: white;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.item-select:focused {
+    -fx-border-color: #444444; /* Un gris un poco más claro al seleccionar, pero NO amarillo */
+    -fx-background-color: #222222;
+}
+
+/* Ajuste de la flechita del combo */
+.item-select .arrow {
+    -fx-background-color: #ffcc00;
 }
 
 .item-select .list-cell {
@@ -166,4 +179,98 @@
 .btn-danger:hover {
     -fx-background-color: #ff5555;
     -fx-text-fill: white;
+}
+
+/* Fondo general de la lista desplegable */
+.combo-box-popup .list-view {
+    -fx-background-color: #1a1a1a;
+    -fx-border-color: #333333;
+}
+
+/* Cada uno de los items (Mag, Rhino, etc.) */
+.combo-box-popup .list-cell {
+    -fx-text-fill: white; 
+    -fx-background-color: #1a1a1a; 
+    -fx-padding: 8 10 8 10; /* Un poco de espacio para que respire */
+}
+
+/* Efecto al pasar el ratón (Hover) o al seleccionarlo */
+.combo-box-popup .list-cell:filled:hover,
+.combo-box-popup .list-cell:filled:selected {
+    -fx-background-color: #333333; /* Un gris oscuro neutro para que el dorado resalte */
+    -fx-text-fill: #ffcc00; /* ¡El amarillo/dorado Prime! */
+    -fx-cursor: hand;
+}
+
+.mod-slot {
+    -fx-font-size: 11px;       /* Un poco más pequeña */
+    -fx-text-alignment: center;
+    -fx-wrap-text: true;       /* ¡CLAVE! Esto hace que si el nombre es largo, use 2 líneas */
+    -fx-padding: 5px;
+}
+
+/* El contenedor que creamos en el Java */
+.modal-container {
+    -fx-background-color: #1a1a1a;
+    -fx-border-color: #333333;
+    -fx-border-width: 2px;
+    -fx-effect: none; 
+}
+
+/* Para la lista dentro del modal, también quitamos el borde de enfoque */
+.modal-container .list-view {
+    -fx-background-color: transparent;
+    -fx-border-color: #222222;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+/* Las celdas de la lista de mods */
+.modal-container .list-cell {
+    -fx-background-color: #1a1a1a;
+    -fx-text-fill: #cccccc;
+}
+
+.modal-container .list-cell:filled:hover {
+    -fx-background-color: #2a2a2a;
+    -fx-text-fill: #ffcc00; 
+}
+
+/* La lista de mods */
+.list-view {
+    -fx-background-color: transparent;
+    -fx-border-color: #333333;
+}
+
+.list-cell {
+    -fx-background-color: #262626;
+    -fx-text-fill: white;
+    -fx-padding: 10;
+    -fx-border-color: #1a1a1a;
+    -fx-border-width: 0 0 1 0;
+}
+
+.list-cell:filled:hover {
+    -fx-background-color: #3d3d3d;
+    -fx-text-fill: #ffcc00;
+}
+
+.build-card {
+    -fx-background-color: #2a2a2a;
+    -fx-border-color: #444;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 15;
+    -fx-min-width: 200;
+}
+
+.build-card:hover {
+    -fx-border-color: #ffcc00;
+    -fx-cursor: hand;
+}
+
+.build-card .label-titulo {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffcc00;
 }

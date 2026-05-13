@@ -59,7 +59,12 @@ public class LoginController {
             Parent root = loader.load();
             
             Stage stage = (Stage) txtUsuario.getScene().getWindow();
-            stage.setScene(new Scene(root, 1024, 768));
+            stage.setScene(new Scene(root, 1300, 768));
+            
+            //Establecemos unos minimos de ancho y alto para que la aplicacion no se deforme
+            stage.setMinWidth(1024);
+            stage.setMinHeight(550);
+
             stage.setTitle("Arsenal Warframe");
             stage.centerOnScreen();
             
