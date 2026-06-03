@@ -85,7 +85,7 @@
 /* Estilo base del selector */
 .item-select {
     -fx-background-color: #1a1a1a;
-    -fx-border-color: #333333; /* Gris oscuro */
+    -fx-border-color: #333333;
     -fx-border-width: 1;
     -fx-text-fill: white;
     -fx-focus-color: transparent;
@@ -93,7 +93,7 @@
 }
 
 .item-select:focused {
-    -fx-border-color: #444444; /* Un gris un poco más claro al seleccionar, pero NO amarillo */
+    -fx-border-color: #444444;
     -fx-background-color: #222222;
 }
 
@@ -191,21 +191,21 @@
 .combo-box-popup .list-cell {
     -fx-text-fill: white; 
     -fx-background-color: #1a1a1a; 
-    -fx-padding: 8 10 8 10; /* Un poco de espacio para que respire */
+    -fx-padding: 8 10 8 10;
 }
 
 /* Efecto al pasar el ratón (Hover) o al seleccionarlo */
 .combo-box-popup .list-cell:filled:hover,
 .combo-box-popup .list-cell:filled:selected {
-    -fx-background-color: #333333; /* Un gris oscuro neutro para que el dorado resalte */
-    -fx-text-fill: #ffcc00; /* ¡El amarillo/dorado Prime! */
+    -fx-background-color: #333333;
+    -fx-text-fill: #ffcc00;
     -fx-cursor: hand;
 }
 
 .mod-slot {
-    -fx-font-size: 11px;       /* Un poco más pequeña */
+    -fx-font-size: 11px;
     -fx-text-alignment: center;
-    -fx-wrap-text: true;       /* ¡CLAVE! Esto hace que si el nombre es largo, use 2 líneas */
+    -fx-wrap-text: true;
     -fx-padding: 5px;
 }
 
@@ -273,4 +273,45 @@
     -fx-font-size: 16px;
     -fx-font-weight: bold;
     -fx-text-fill: #ffcc00;
+}
+
+/* Botones tipo pestaña (panel builds) */
+.btn-pestana {
+    -fx-background-color: #1a1a1a;
+    -fx-text-fill: #888888;
+    -fx-border-color: #333333;
+    -fx-border-width: 1 1 0 1; 
+    -fx-padding: 8 25 8 25;
+    -fx-cursor: hand;
+    -fx-font-size: 14px;
+}
+
+.btn-pestana:hover {
+    -fx-background-color: #222222;
+    -fx-text-fill: #c5a45f;
+}
+
+.btn-pestana-activa {
+    -fx-background-color: #2a2a2a;
+    -fx-text-fill: #c5a45f;
+    -fx-border-color: #c5a45f;
+    -fx-border-width: 2 1 0 1;
+    -fx-padding: 8 25 8 25;
+    -fx-cursor: hand;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+/* Estilo para cuando una fila de la lista está seleccionada */
+.list-cell:filled:selected {
+    -fx-background-color: #333333;
+    -fx-border-color: #c5a45f;
+    -fx-border-width: 0 0 0 3;
+    -fx-text-fill: #ffffff;
+}
+
+/* Estilo para cuando pasas el ratón por encima (hover) */
+.list-cell:filled:hover {
+    -fx-background-color: #2a2a2a;
+    -fx-text-fill: #c5a45f;
 }

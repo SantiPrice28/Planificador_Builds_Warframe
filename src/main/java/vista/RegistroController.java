@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
 public class RegistroController {
@@ -12,6 +13,22 @@ public class RegistroController {
     @FXML private TextField txtNombreUsuario;
     @FXML private PasswordField txtContrasena;
     @FXML private PasswordField txtContrasenaRepetir;
+    
+    @FXML
+    public void initialize() {
+        // Al pulsar Enter en el usuario salta a la contraseña
+        txtNombreUsuario.setOnAction(event -> txtContrasena.requestFocus());
+
+        // Al pulsar Enter en la contraseña salta a repetir contraseña
+        txtContrasena.setOnAction(event -> txtContrasenaRepetir.requestFocus());
+
+        // Al pulsar Enter en repetir contraseña intenta registrar
+        txtContrasenaRepetir.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                handleRegistrar();
+            }
+        });
+    }
 
     @FXML
     private void handleRegistrar() {
@@ -25,7 +42,7 @@ public class RegistroController {
         }
 
         if (!pass1.equals(pass2)) {
-            mostrarError("Las contraseñas no coinciden, Tenno.");
+            mostrarError("Las contraseñas no coinciden.");
             return;
         }
 

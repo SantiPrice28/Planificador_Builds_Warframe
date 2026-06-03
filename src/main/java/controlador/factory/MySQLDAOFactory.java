@@ -8,7 +8,7 @@ import modelo.dao.*;
 public class MySQLDAOFactory extends DAOFactory {
 
     final static String user = "root";
-    final static String password = "pricefield28";
+    final static String password = "root";
     final static String BD = "planificador_warframe"; //Indica aqui la BD 
     final static String IP = "localhost"; //Indica aqui la IP 
     final static String url = "jdbc:mysql://" + IP + ":3306/" + BD;

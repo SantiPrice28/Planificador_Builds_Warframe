@@ -21,6 +21,20 @@ public class LoginController {
     public void initialize() {
         System.out.println("Pantalla de Login cargada.");
         ControladorPrincipal.iniciaFactory(); 
+        
+        // evento enter para el campo usuario
+        txtUsuario.setOnKeyPressed(event -> {
+            if (event.getCode() == javafx.scene.input.KeyCode.ENTER) {
+                handleConectar();
+            }
+        });
+
+        // evento enter para el campo contraseña
+        txtContrasena.setOnKeyPressed(event -> {
+            if (event.getCode() == javafx.scene.input.KeyCode.ENTER) {
+                handleConectar();
+            }
+        });
     }
 
     @FXML
@@ -64,6 +78,9 @@ public class LoginController {
             //Establecemos unos minimos de ancho y alto para que la aplicacion no se deforme
             stage.setMinWidth(1024);
             stage.setMinHeight(550);
+            
+            stage.setWidth(1300);
+            stage.setHeight(768);
 
             stage.setTitle("Arsenal Warframe");
             stage.centerOnScreen();

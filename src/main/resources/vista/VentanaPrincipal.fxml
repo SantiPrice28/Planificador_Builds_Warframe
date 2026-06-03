@@ -19,11 +19,12 @@
 
         <Button fx:id="btnWarframes" text="Warframes" styleClass="nav-btn, active" onAction="#mostrarPanelWarframes" maxWidth="Infinity"/>
         <Button fx:id="btnArmas" text="Armas" styleClass="nav-btn" onAction="#mostrarPanelArmas" maxWidth="Infinity"/>
-        <Button fx:id="btnBuilds" text="Mis Builds" styleClass="nav-btn" onAction="#mostrarPanelBuilds" maxWidth="Infinity"/>
+        <Button fx:id="btnBuilds" text="Builds" styleClass="nav-btn" onAction="#mostrarPanelBuilds" maxWidth="Infinity"/>
         
         <Region VBox.vgrow="ALWAYS" />
 
-        <Button text="CERRAR SESIÓN" styleClass="nav-btn, nav-btn-exit" onAction="#cerrarSesion" maxWidth="Infinity"/>
+        <Label fx:id="lblUsuario" text="Usuario: " style="-fx-text-fill: #c5a45f; -fx-font-weight: bold; -fx-padding: 10 0 10 15;" />
+        <Button fx:id="btnCerrarSesion" text="CERRAR SESIÓN" styleClass="nav-btn, nav-btn-exit" onAction="#cerrarSesion" maxWidth="Infinity"/>
     </VBox>
 
     <VBox styleClass="main-content" HBox.hgrow="ALWAYS">
@@ -144,7 +145,15 @@
                 </VBox>
             </HBox>
 
-            <ListView fx:id="listaBuilds" visible="false" managed="false" styleClass="builds-list" />
+            <VBox fx:id="panelBuildsContenedor" visible="false" managed="false" spacing="0">
+                <HBox spacing="5" alignment="BOTTOM_LEFT" style="-fx-padding: 0 0 0 5;">
+                    <Button fx:id="btnBuildsPublicas" text="Builds públicas" styleClass="btn-pestana"/>
+                    <Button fx:id="btnTusBuilds" text="Tus builds" styleClass="btn-pestana-activa"/>
+                    <Button fx:id="btnEliminarBuild" text="ELIMINAR BUILD" onAction="#eliminarBuildSeleccionada" style="-fx-background-color: #5a2e2e; -fx-text-fill: #ff6666;" />
+                </HBox>
+                
+                <ListView fx:id="listaBuilds" VBox.vgrow="ALWAYS" styleClass="builds-list" />
+            </VBox>
             
         </StackPane>
     </VBox>

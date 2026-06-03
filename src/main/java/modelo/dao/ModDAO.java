@@ -39,6 +39,30 @@ public class ModDAO {
         return lista;
     }
 
+    public Mod obtenerModPorId(Connection conn, int idMod) throws SQLException {
+        String sql = "SELECT * FROM `mod` WHERE id = ?";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, idMod);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    Mod m = new Mod();
+                    m.setId(rs.getInt("id"));
+                    m.setNombre(rs.getString("nombre"));
+                    m.setTipoObjeto(rs.getString("tipo_objeto"));
+                    m.setCategoria(rs.getString("categoria"));
+
+                    int idTipoArma = rs.getInt("id_tipo_arma");
+                    m.setIdTipoArma(rs.wasNull() ? 0 : idTipoArma);
+
+                    m.setEfecto(rs.getString("efecto"));
+                    m.setRareza(rs.getString("rareza"));
+                    return m;
+                }
+            }
+        }
+        return null;
+    }
+
     public List<Mod> listarModsFiltrados(Connection conn, Object objetivo) throws SQLException {
         List<Mod> lista = new ArrayList<>();
         String sql = "";
@@ -254,9 +278,9 @@ public class ModDAO {
         List<Integer> incompatibles = new ArrayList<>();
 
         String sql = """
-        SELECT id_mod_2 as incompatible FROM mod_incompatible WHERE id_mod_1 = ?
+        SELECT id_mod_2 FROM mod_incompatible WHERE id_mod_1 = ?
         UNION
-        SELECT id_mod_1 as incompatible FROM mod_incompatible WHERE id_mod_2 = ?
+        SELECT id_mod_1 FROM mod_incompatible WHERE id_mod_2 = ?
     """;
 
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -265,10 +289,9 @@ public class ModDAO {
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                incompatibles.add(rs.getInt("incompatible"));
+                incompatibles.add(rs.getInt(1));
             }
         }
-
         return incompatibles;
     }
 }

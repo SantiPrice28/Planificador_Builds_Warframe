@@ -27,6 +27,8 @@ public class Build {
     private Integer mod6Id;
     private Integer mod7Id;
     private Integer mod8Id;
+    private boolean esPublica;
+    private String nombreEquipamiento;
 
     // Constructor vacío
     public Build() {
@@ -35,7 +37,7 @@ public class Build {
     public Build(int id, int idUsuario, String nombre, String tipo, Integer idWarframe,
             Integer idArma, String descripcion, Integer mod1Id, Integer mod2Id,
             Integer mod3Id, Integer mod4Id, Integer mod5Id, Integer mod6Id,
-            Integer mod7Id, Integer mod8Id) {
+            Integer mod7Id, Integer mod8Id, boolean esPublica, String nombreEquipamiento) {
         this.id = id;
         this.idUsuario = idUsuario;
         this.nombre = nombre;
@@ -51,6 +53,8 @@ public class Build {
         this.mod6Id = mod6Id;
         this.mod7Id = mod7Id;
         this.mod8Id = mod8Id;
+        this.esPublica = esPublica;
+        this.nombreEquipamiento = nombreEquipamiento;
     }
 
     // Getters y Setters
@@ -174,8 +178,27 @@ public class Build {
         this.mod8Id = mod8Id;
     }
 
+    public String getNombreEquipamiento() {
+        return nombreEquipamiento;
+    }
+
+    public void setNombreEquipamiento(String nombreEquipamiento) {
+        this.nombreEquipamiento = nombreEquipamiento;
+    }
+
+    public boolean isEsPublica() {
+        return esPublica;
+    }
+
+    public void setEsPublica(boolean esPublica) {
+        this.esPublica = esPublica;
+    }
+
     @Override
     public String toString() {
-        return nombre;
+        String equipo = (nombreEquipamiento != null && !nombreEquipamiento.isEmpty())
+                ? " [" + nombreEquipamiento + "]"
+                : "";
+        return nombre + " - " + descripcion + equipo;
     }
 }
