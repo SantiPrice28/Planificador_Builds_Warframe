@@ -11,7 +11,6 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import modelo.vo.Arma;
 import modelo.vo.TipoArma;
-import vista.Ventana;
 
 /**
  *
@@ -19,6 +18,24 @@ import vista.Ventana;
  */
 public class ArmaDAO {
 
+    //Metodo para JavaFX
+    public List<Arma> listarArmas(Connection conn) throws SQLException {
+    List<Arma> lista = new ArrayList<>();
+    String sql = "SELECT * FROM arma";
+    try (Statement sent = conn.createStatement(); ResultSet rs = sent.executeQuery(sql)) {
+        while (rs.next()) {
+            lista.add(new Arma(
+                rs.getInt("id"), rs.getString("nombre"), rs.getInt("id_tipo_arma"),
+                rs.getDouble("dano_impacto"), rs.getDouble("dano_perforante"), rs.getDouble("dano_cortante"),
+                rs.getDouble("dano_frio"), rs.getDouble("dano_electrico"), rs.getDouble("dano_calor"),
+                rs.getDouble("dano_toxina"), rs.getDouble("critico"), rs.getDouble("mult_critico"),
+                rs.getDouble("estado"), rs.getDouble("precision"), rs.getDouble("cadencia"), rs.getString("descripcion")
+            ));
+        }
+    }
+    return lista;
+}
+    
     public void cargarArmasCombo(Connection conn, JComboBox<Arma> combo) throws SQLException {
         String sql = "SELECT * FROM arma";
         Statement sent = conn.createStatement();
@@ -48,28 +65,28 @@ public class ArmaDAO {
     }
 
     public void cargarStatsBaseArmas(Connection conn, JComboBox<Arma> cmb_armas,
-            JLabel[] labelsArray, Ventana vista_principal) {
+            JLabel[] labelsArray) {
 
         Arma arma = (Arma) cmb_armas.getSelectedItem();
         if (arma == null) {
             return;
         }
 
-        // Guardar stats base en el mapa
-        vista_principal.setValorBase("impacto", arma.getDañoImpacto());
-        vista_principal.setValorBase("perforante", arma.getDañoPerforante());
-        vista_principal.setValorBase("cortante", arma.getDañoCortante());
-
-        vista_principal.setValorBase("frio", arma.getDañoFrio());
-        vista_principal.setValorBase("electrico", arma.getDañoElectrico());
-        vista_principal.setValorBase("calor", arma.getDañoCalor());
-        vista_principal.setValorBase("toxina", arma.getDañoToxina());
-
-        vista_principal.setValorBase("critico", arma.getCritico());
-        vista_principal.setValorBase("mult_critico", arma.getMultCritico());
-        vista_principal.setValorBase("estado", arma.getEstado());
-        vista_principal.setValorBase("precision", arma.getPrecision());
-        vista_principal.setValorBase("cadencia", arma.getCadencia());
+//        // Guardar stats base en el mapa
+//        vista_principal.setValorBase("impacto", arma.getDañoImpacto());
+//        vista_principal.setValorBase("perforante", arma.getDañoPerforante());
+//        vista_principal.setValorBase("cortante", arma.getDañoCortante());
+//
+//        vista_principal.setValorBase("frio", arma.getDañoFrio());
+//        vista_principal.setValorBase("electrico", arma.getDañoElectrico());
+//        vista_principal.setValorBase("calor", arma.getDañoCalor());
+//        vista_principal.setValorBase("toxina", arma.getDañoToxina());
+//
+//        vista_principal.setValorBase("critico", arma.getCritico());
+//        vista_principal.setValorBase("mult_critico", arma.getMultCritico());
+//        vista_principal.setValorBase("estado", arma.getEstado());
+//        vista_principal.setValorBase("precision", arma.getPrecision());
+//        vista_principal.setValorBase("cadencia", arma.getCadencia());
 
         // Ocultar todos los labels
         for (JLabel lbl : labelsArray) {
@@ -136,7 +153,7 @@ public class ArmaDAO {
             labelsArray[i].setVisible(true);
         }
 
-        vista_principal.panel_armas.revalidate();
-        vista_principal.panel_armas.repaint();
+//        vista_principal.panel_armas.revalidate();
+//        vista_principal.panel_armas.repaint();
     }
 }
